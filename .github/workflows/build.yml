@@ -62,38 +62,32 @@ jobs:
           path: dist/
           retention-days: 90
 
-  # ── Job 3: Deploy to GitHub Pages (main branch only) ─────────────────────
-  deploy:
-    name: Deploy to GitHub Pages
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Build
-        run: python build.py
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist/
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+  # ── Job 3: Deploy to GitHub Pages ────────────────────────────────────────
+  # Requires either a public repo or GitHub Pro.
+  # Currently disabled — download the build artifact from the Actions tab instead.
+  #
+  # To enable: uncomment this job, make the repo public (or upgrade to Pro),
+  # then go to Settings → Pages → Source: GitHub Actions.
+  #
+  # deploy:
+  #   name: Deploy to GitHub Pages
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+  #   permissions:
+  #     pages: write
+  #     id-token: write
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: actions/setup-python@v5
+  #       with:
+  #         python-version: '3.11'
+  #     - run: python build.py
+  #     - uses: actions/configure-pages@v4
+  #     - uses: actions/upload-pages-artifact@v3
+  #       with:
+  #         path: dist/
+  #     - uses: actions/deploy-pages@v4

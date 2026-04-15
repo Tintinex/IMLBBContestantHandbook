@@ -1,0 +1,21 @@
+# Normalize line endings for all text files
+* text=auto
+
+# Explicitly LF for files that must stay Unix-style (CI/CD, Python, JS)
+*.py    text eol=lf
+*.js    text eol=lf
+*.html  text eol=lf
+*.css   text eol=lf
+*.json  text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.md    text eol=lf
+*.sh    text eol=lf
+
+# Binary files — never touch line endings
+*.jpg   binary
+*.jpeg  binary
+*.png   binary
+*.avif  binary
+*.pdf   binary
+*.ico   binary
