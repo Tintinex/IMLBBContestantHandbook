@@ -136,7 +136,7 @@ const TEAM_MEMBERS = [
   },
   {
     name: 'Andrew',
-    role: 'Team Shine',
+    role: 'IMBB Contestant Coordinator',
     bio: 'Andrew \u201cBootdog\u201d Johnson is International Mr. Bootblack 2008. He\u2019s been bootblacking publicly for over 25 years and produced IMBB from 2012 to 2017.',
     fileId: '19PtxLFX0b-kdrxaqqvYHpS2wgPDiMKyX',
   },

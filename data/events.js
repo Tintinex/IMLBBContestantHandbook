@@ -71,7 +71,7 @@ const EVENTS = [
     title: 'Registration',
     day: 'Wednesday',
     time: '7:00 PM \u2013 10:00 PM',
-    venue: 'Congress Plaza Hotel',
+    venue: 'Congress Plaza Hotel - Florentine Room',
     badge: 'OPTIONAL',
     leftCol: [
       {
@@ -123,10 +123,10 @@ const EVENTS = [
   {
     id: 'event-2',
     number: '02',
-    title: 'Contestant Orientation & Check-In',
+    title: 'Contestant Orientation',
     day: 'Thursday',
-    time: 'Congress Plaza Hotel, Gold Room',
-    venue: 'Congress Plaza Hotel \u2014 Gold Room',
+    time: '11:30 AM \u2013 3:00 PM',
+    venue: 'Congress Plaza Hotel \u2014 Florentine Room',
     badge: 'MANDATORY',
     leftCol: [
       {

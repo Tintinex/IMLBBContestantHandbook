@@ -1,6 +1,6 @@
 /**
  * ╔══════════════════════════════════════════════════════════════╗
- * ║         IML CONTESTANT HANDBOOK  —  ANNUAL CONFIG           ║
+ * ║         IMLBB CONTESTANT HANDBOOK  —  ANNUAL CONFIG           ║
  * ║                                                              ║
  * ║  Update ONLY this file each year.                           ║
  * ║  Do not edit index.html, src/, or style files.              ║
@@ -23,7 +23,7 @@
 /* ─────────────────────────────────────────────
    1.  EDITION
 ───────────────────────────────────────────── */
-const IML_NUMBER = 48;          // e.g. 48 → "IML #48"
+const IML_NUMBER = 48;          // e.g. 48 → "IMLBB #48"
 const IML_YEAR   = 2026;        // 4-digit year
 
 /* ─────────────────────────────────────────────
@@ -55,7 +55,7 @@ const CONTESTANTS_SHEET_ID  = '1wPGSfDhd3Tb5a1skEeOiM0MXIbxhBzEnyzDUYkNEm6Q';
 const CONTESTANTS_SHEET_TAB = 'Sheet1';   // tab name inside the spreadsheet
 
 /* ─────────────────────────────────────────────
-   4.  GOOGLE SHEETS  (IML team / handlers)
+   4.  GOOGLE SHEETS  (IMLBB team / handlers)
 ───────────────────────────────────────────── */
 const TEAM_SHEET_ID  = '1BNZIcmptlW_jNNtsVXrhyJ6UFhHJLq7ysVo5IPAsZTY';
 const TEAM_SHEET_TAB = 'Form Responses 1';
@@ -68,11 +68,11 @@ const TEAM_SHEET_TAB = 'Form Responses 1';
 const WELCOME_LETTER = {
   eyebrow: 'A message from your International Mr. Leather 2025',
   paragraphs: [
-    'To the IML 2026 Class,',
+    'To the IMLBB 2026 Class,',
     'Welcome to International Mr Leather! You made it! You are here because you deserve to be here. You are about to embark on an experience that has shaped my life in ways I couldn\u2019t possibly imagine when I went through it 10 years ago. Let go of your insecurities, your fears, and embrace the experience fully. Represent yourself unapologetically, showcase your wonderful community, support each other.',
     'We often say to not look at this as you\u2019re competing against your classmates, but you are going through this experience together. Only one of you will have the golden medallion around your neck, but the relationships and connections you will make with your classmates is the real prize.',
-    'You as the IML 2026 class have a unique opportunity to show the world that we can support each other, that we can be each other\u2019s cheerleaders without taking anyone or anything down, that we can be celebrated in all shapes and sizes, that we respect and value our bootblacks, and bring this positive energy back into your communities. Change is long and hard, but the hardest part is to begin, and you\u2019ve done that already.',
-    'I\u2019m immensely humbled and honored to have this class as my very first class as the IML Den Daddy. Myself and my team of incredible handlers and Team Shine know what you are experiencing, and will be there to support you at every step. I want each and every one of you to have an incredibly fulfilling experience regardless of your placement, and I will do everything I can to make that happen. I hope that I make you proud.',
+    'You as the IMLBB 2026 class have a unique opportunity to show the world that we can support each other, that we can be each other\u2019s cheerleaders without taking anyone or anything down, that we can be celebrated in all shapes and sizes, that we respect and value our bootblacks, and bring this positive energy back into your communities. Change is long and hard, but the hardest part is to begin, and you\u2019ve done that already.',
+    'I\u2019m immensely humbled and honored to have this class as my very first class as the IMLBB Den Daddy. Myself and my team of incredible handlers and Team Shine know what you are experiencing, and will be there to support you at every step. I want each and every one of you to have an incredibly fulfilling experience regardless of your placement, and I will do everything I can to make that happen. I hope that I make you proud.',
   ],
   signature: '\u2014 Your Den Daddy Miguel',
 };
@@ -81,13 +81,13 @@ const WELCOME_LETTER = {
    6.  FIRST WIVES' CLUB LETTER
 ───────────────────────────────────────────── */
 const FIRST_WIVES_LETTER = {
-  intro: 'A letter to the partners, spouses, and significant others of IML 2026 contestants \u2014',
+  intro: 'A letter to the partners, spouses, and significant others of IMLBB 2026 contestants \u2014',
   paragraphs: [
     'We came. You are here because someone you love is brave enough to stand on one of leather\u2019s biggest stages and say \u201cThis is who I am.\u201d This takes the kind of courage that is only possible with the right people behind it. That means you.',
-    'IML weekend can feel overwhelming from the outside. Your person will be busy, distracted, stretched thin, and running on adrenaline. There will be moments where you feel like a spectator in an event that revolves entirely around someone else. That feeling is real, and it is valid \u2014 and it is also temporary.',
+    'IMLBB weekend can feel overwhelming from the outside. Your person will be busy, distracted, stretched thin, and running on adrenaline. There will be moments where you feel like a spectator in an event that revolves entirely around someone else. That feeling is real, and it is valid \u2014 and it is also temporary.',
     'The First Wives\u2019 Club exists because we know the weekend is only possible because of the people who show up for the contestants. So enjoy morning brunch in your space \u2014 a room full of people who understand exactly where you are sitting right now.',
     'Thank you for being here. Thank you for making this possible. The leather community honours your sacrifice, your support, and your love.',
-    '\u2014 The IML Team',
+    '\u2014 The IMLBB Team',
   ],
   questions: [
     'What does your partner most need from you this weekend?',
@@ -112,7 +112,7 @@ const EVENTS = [
     time: '7:00 PM – 10:00 PM',
     venue: 'Congress Plaza Hotel — Photo Room',
     badge: 'OPTIONAL',
-    description: 'Pick up your IML contestant packet, which includes your badge, schedule, contestant number, and any materials prepared for you. You will have your official contestant photo taken during this time. This is also a great opportunity to meet your handlers and fellow contestants in a relaxed setting before the weekend officially begins.',
+    description: 'Pick up your IMLBB contestant packet, which includes your badge, schedule, contestant number, and any materials prepared for you. You will have your official contestant photo taken during this time. This is also a great opportunity to meet your handlers and fellow contestants in a relaxed setting before the weekend officially begins.',
     rememberText: 'Bring a valid government-issued photo ID. Wear something that represents you — this is your first impression on your handlers and classmates.',
     yourNotes: '',
   },
@@ -124,7 +124,7 @@ const EVENTS = [
     time: 'Ongoing',
     venue: 'Congress Plaza Hotel — Photo Room',
     badge: 'MANDATORY',
-    description: 'Formal orientation session for all contestants. You will receive your complete weekend schedule, meet the IML team, and be briefed on competition rules, expectations, and logistics. Attendance is required.',
+    description: 'Formal orientation session for all contestants. You will receive your complete weekend schedule, meet the IMLBB team, and be briefed on competition rules, expectations, and logistics. Attendance is required.',
     rememberText: 'Bring your confirmation email and a valid photo ID. Arrive on time — orientation sets the tone for the entire weekend.',
     yourNotes: '',
   },
@@ -136,7 +136,7 @@ const EVENTS = [
     time: 'Congress Plaza Hotel',
     venue: 'Main Stage',
     badge: 'MANDATORY',
-    description: 'Your first official public appearance as an IML 2026 contestant. You will be introduced to the IML community in a cocktail-party format. Dress to impress in your finest leather.',
+    description: 'Your first official public appearance as an IMLBB 2026 contestant. You will be introduced to the IMLBB community in a cocktail-party format. Dress to impress in your finest leather.',
     rememberText: 'This is your first impression on the judges and the community. Be present, be social, be yourself.',
     yourNotes: '',
   },
@@ -155,7 +155,7 @@ const EVENTS = [
   {
     id: 'event-05',
     number: '05',
-    title: 'IML Vendor Fair',
+    title: 'IMLBB Vendor Fair',
     day: 'Friday',
     time: 'Exhibition Hall',
     venue: 'Exhibition Hall',
@@ -172,7 +172,7 @@ const EVENTS = [
     time: 'Photo Room',
     venue: 'Photo Room',
     badge: 'MANDATORY',
-    description: 'One-on-one interview with the judging panel. This is your primary opportunity to articulate your vision for leather community service, your personal story, and why you are the right person to hold the IML title.',
+    description: 'One-on-one interview with the judging panel. This is your primary opportunity to articulate your vision for leather community service, your personal story, and why you are the right person to hold the IMLBB title.',
     rememberText: 'Prepare, but don\'t over-rehearse. The judges want to meet you, not a performance of you.',
     yourNotes: '',
   },
@@ -184,8 +184,8 @@ const EVENTS = [
     time: 'Various',
     venue: 'Various',
     badge: 'OPTIONAL',
-    description: 'Contestants participate in a hands-on community service project, reinforcing IML\'s commitment to giving back. Projects vary by year.',
-    rememberText: 'Show up with energy and genuine engagement. This is an important part of the IML ethos.',
+    description: 'Contestants participate in a hands-on community service project, reinforcing IMLBB\'s commitment to giving back. Projects vary by year.',
+    rememberText: 'Show up with energy and genuine engagement. This is an important part of the IMLBB ethos.',
     yourNotes: '',
   },
   {
@@ -208,8 +208,8 @@ const EVENTS = [
     time: 'Congress Plaza Hotel',
     venue: 'Congress Plaza Hotel',
     badge: 'OPTIONAL',
-    description: 'A beloved IML tradition — a brunch gathering for the partners, spouses, and significant others of contestants. A space for support, laughter, and community away from the competition floor.',
-    rememberText: 'Your support network matters. The people who travel with you are part of your IML story. Make sure they feel included in the weekend.',
+    description: 'A beloved IMLBB tradition — a brunch gathering for the partners, spouses, and significant others of contestants. A space for support, laughter, and community away from the competition floor.',
+    rememberText: 'Your support network matters. The people who travel with you are part of your IMLBB story. Make sure they feel included in the weekend.',
     yourNotes: '',
   },
   {
@@ -220,8 +220,8 @@ const EVENTS = [
     time: 'Various',
     venue: 'Various',
     badge: 'OPTIONAL',
-    description: 'Throughout the weekend, IML hosts and partners with various play spaces, social mixers, and parties across the hotel and the city. Check your printed schedule for locations and times.',
-    rememberText: 'Pace yourself. Have fun. Consent is mandatory at all IML events and venues.',
+    description: 'Throughout the weekend, IMLBB hosts and partners with various play spaces, social mixers, and parties across the hotel and the city. Check your printed schedule for locations and times.',
+    rememberText: 'Pace yourself. Have fun. Consent is mandatory at all IMLBB events and venues.',
     yourNotes: '',
   },
   {
@@ -232,7 +232,7 @@ const EVENTS = [
     time: 'Private Venue',
     venue: 'Private Venue',
     badge: 'MANDATORY',
-    description: 'A private dinner exclusively for contestants, handlers, and IML staff. A chance to connect, relax, and prepare for the final day together.',
+    description: 'A private dinner exclusively for contestants, handlers, and IMLBB staff. A chance to connect, relax, and prepare for the final day together.',
     rememberText: 'Be present. This is one of the last times the class will be together before Finals.',
     yourNotes: '',
   },
@@ -244,7 +244,7 @@ const EVENTS = [
     time: 'Main Stage',
     venue: 'Main Stage',
     badge: 'MANDATORY',
-    description: 'The culminating event of the IML weekend. Finalists are announced, the new International Mr. Leather is crowned, and the leather community celebrates its newest titleholder.',
+    description: 'The culminating event of the IMLBB weekend. Finalists are announced, the new International Mr. Leather is crowned, and the leather community celebrates its newest titleholder.',
     rememberText: 'Regardless of your placement, you earned your place in this class. Walk onto that stage with pride.',
     yourNotes: '',
   },
@@ -256,14 +256,14 @@ const EVENTS = [
     time: 'Various',
     venue: 'Various',
     badge: 'OPTIONAL',
-    description: 'The unofficial close of IML weekend. Celebrations, parties, and gatherings across the hotel and the city. A moment to celebrate the new titleholder and reflect on an incredible weekend.',
+    description: 'The unofficial close of IMLBB weekend. Celebrations, parties, and gatherings across the hotel and the city. A moment to celebrate the new titleholder and reflect on an incredible weekend.',
     rememberText: 'Exchange contacts before people check out. The friendships made this weekend last a lifetime.',
     yourNotes: '',
   },
 ];
 
 /* ─────────────────────────────────────────────
-   8.  IML TEAM MEMBERS
+   8.  IMLBB TEAM MEMBERS
    "fileId" = Google Drive file ID of their photo
    (the long string from drive.google.com/file/d/FILEID/view)
    Role options: "Contestant Handler" | "Team Shine"
@@ -290,19 +290,19 @@ const TEAM_MEMBERS = [
   {
     name: 'Dave Barnett',
     role: 'Contestant Handler',
-    bio: 'With experience as both an IML contestant and a handler, I bring a grounded, people-first approach to supporting competitors. I understand the pressure of the stage and use that insight to mentor with clarity, calm, and respect.',
+    bio: 'With experience as both an IMLBB contestant and a handler, I bring a grounded, people-first approach to supporting competitors. I understand the pressure of the stage and use that insight to mentor with clarity, calm, and respect.',
     fileId: '1jxE9yMGXgvFQzwBSp1tIK-1z4GMN74Yi',
   },
   {
     name: 'Robert Johnson',
     role: 'Contestant Handler',
-    bio: 'Bob is Mr Los Angeles Leather 2006, a founding member of the Los Angeles Band of Brothers, founding member and first President of the Michigan Band of Brothers and a founder of The Mavericks Leather Social Club in Detroit. He\u2019s been an emcee for over 50 contests and has been a proud member of the IML Handling family since 2014.',
+    bio: 'Bob is Mr Los Angeles Leather 2006, a founding member of the Los Angeles Band of Brothers, founding member and first President of the Michigan Band of Brothers and a founder of The Mavericks Leather Social Club in Detroit. He\u2019s been an emcee for over 50 contests and has been a proud member of the IMLBB Handling family since 2014.',
     fileId: '1QXVgZ4tBw0rFiBWGsbGFvOiyHQyaqYng',
   },
   {
     name: 'Jawn Marques',
     role: 'Contestant Handler',
-    bio: 'I\u2019m the 1st Runner-Up at IML 42, and this is my fifth year serving as a Handler. I love this role because it allows me to support competitors who show up for our community with purpose, heart, and courage.',
+    bio: 'I\u2019m the 1st Runner-Up at IMLBB 42, and this is my fifth year serving as a Handler. I love this role because it allows me to support competitors who show up for our community with purpose, heart, and courage.',
     fileId: '1-aeP37GuuF3hACqYsjw45dpNU75MM-mm',
   },
   {
@@ -314,19 +314,19 @@ const TEAM_MEMBERS = [
   {
     name: 'Richard Hubley',
     role: 'Contestant Handler',
-    bio: 'Richard Hubley, Class of IML30, is Mr Leather Ottawa 2008, from Ottawa, Ontario, Canada. He has volunteered at IML every year since and has been a contestant handler for 10 years.',
+    bio: 'Richard Hubley, Class of IML30, is Mr Leather Ottawa 2008, from Ottawa, Ontario, Canada. He has volunteered at IMLBB every year since and has been a contestant handler for 10 years.',
     fileId: '14GPThvwxwgiXIhNgxjzrzDsJ3U4I6Eba',
   },
   {
     name: 'Thomas Seggie',
     role: 'Contestant Handler',
-    bio: 'G\u2019day IML 2026 Class, Seggie here \u2014 an Aussie kinkster from Sydney currently living in London. Part of the IML 44 class, returning for a second year as a handler.',
+    bio: 'G\u2019day IMLBB 2026 Class, Seggie here \u2014 an Aussie kinkster from Sydney currently living in London. Part of the IMLBB 44 class, returning for a second year as a handler.',
     fileId: '1D8UBmBFl0U4xUZf8KfXrjkTCP0HJKhoN',
   },
   {
     name: 'Briar Wood',
     role: 'Team Shine',
-    bio: 'Briar (She/They/Captain) has been part of the IML universe since 2015 and joined Leslie\u2019s Team Shine in 2019. Now in her 6th year, she serves on Team Shine alongside Handlers who return year after year.',
+    bio: 'Briar (She/They/Captain) has been part of the IMLBB universe since 2015 and joined Leslie\u2019s Team Shine in 2019. Now in her 6th year, she serves on Team Shine alongside Handlers who return year after year.',
     fileId: '1rZMvAhGrjk0Q5RTKRYTky0dOXuIuea0-',
   },
   {
@@ -356,13 +356,13 @@ const TEAM_MEMBERS = [
   {
     name: 'Freddie Rasheed',
     role: 'Contestant Handler',
-    bio: 'Freddie Rasheed is a former Mr. Olympus Leather 2005 and Mr. Chicago Leather 2008. He has been involved in the leather community for over 25 years and has volunteered for the last 22 years at IML as a contestant handler.',
+    bio: 'Freddie Rasheed is a former Mr. Olympus Leather 2005 and Mr. Chicago Leather 2008. He has been involved in the leather community for over 25 years and has volunteered for the last 22 years at IMLBB as a contestant handler.',
     fileId: '1dpa0gTh9mFKnpN_pDEw-m-kqg6JILBQI',
   },
   {
     name: 'Josh Fortuna',
     role: 'Contestant Handler',
-    bio: 'Josh Fortuna, Mr Michigan Leather 2015, has been an IML Contestant Handler since 2016. His best advice: be your TRUE, AUTHENTIC and RAW self.',
+    bio: 'Josh Fortuna, Mr Michigan Leather 2015, has been an IMLBB Contestant Handler since 2016. His best advice: be your TRUE, AUTHENTIC and RAW self.',
     fileId: '1DkzkSVxi_LI24a7mv6hzk_aRpFGWOTzz',
   },
   {
@@ -380,7 +380,7 @@ const TEAM_MEMBERS = [
   {
     name: 'Keron Woodrow',
     role: 'Contestant Handler',
-    bio: 'Keron (Mr. Mayhem Leather 2023\u20132024) is a scientist-manager by day and a kinkster Switch by night. Part of IML Class 46, this is his first year on the Handlers Team.',
+    bio: 'Keron (Mr. Mayhem Leather 2023\u20132024) is a scientist-manager by day and a kinkster Switch by night. Part of IMLBB Class 46, this is his first year on the Handlers Team.',
     fileId: '1YRIfbjm6VjlxQODX8WquW64xdmmrv0oa',
   },
   {
@@ -411,7 +411,7 @@ const NEARBY_SPOTS = [
 ───────────────────────────────────────────── */
 const CLOSING_QUOTE = {
   text: 'Leather is not what you wear. It is how you love \u2014 boldly, honestly, and without apology.',
-  attribution: '\u2014 IML Community',
+  attribution: '\u2014 IMLBB Community',
 };
 
 /* ═══════════════════════════════════════════════════════════════
