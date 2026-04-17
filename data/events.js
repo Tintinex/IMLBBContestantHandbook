@@ -32,27 +32,46 @@
  *  venue       Venue / room shown in the detail page header
  *  badge       "OPTIONAL" or "MANDATORY"
  *
+ *  COLUMN CONTENT
  *  ─────────────────────────────────────────────────────────────
- *  COLUMN CONTENT  (leftCol / rightCol)
- *  ─────────────────────────────────────────────────────────────
- *  Each column is an array of section objects.  Available types:
+ *  leftCol     Array   Sections rendered in the left column
+ *  rightCol    Array   Sections rendered in the right column
+ *
+ *  Each section is an object with a "type" field plus type-specific fields:
  *
  *  { type: 'qa', q: 'Question?', a: 'Answer text.' }
+ *    → A bold question label followed by a paragraph answer.
  *
- *  { type: 'checklist', q: 'Question?',
- *    items: ['item 1', 'item 2'], note: 'Optional note after list.' }
+ *  { type: 'checklist', q: 'Question?', items: ['item 1', 'item 2'], note: 'Optional note.' }
+ *    → A bold question label, a bullet list, and an optional italic note.
+ *    → Omit `note` (or set to '') if not needed.
  *
- *  { type: 'callout', label: 'Remember', text: 'Reminder text.' }
- *    label can also be 'Good to know'
+ *  { type: 'callout', label: 'Remember', text: 'Tip text.' }
+ *    → A dark callout box. Use label "Remember" or "Good to know".
  *
- *  { type: 'tip', text: 'Top tip text.' }
- *    Renders as a blue "Top Tip" callout box.
+ *  { type: 'tip', text: 'Tip text.' }
+ *    → A blue "Top Tip" callout box.
  *
- *  { type: 'textarea', q: 'Your prep notes',
- *    placeholder: 'Hint text…', rows: 3 }
- *    Leave q: '' to omit the label.
+ *  { type: 'textarea', q: 'Your prep notes', placeholder: 'Hint text…', rows: 3 }
+ *    → A labelled textarea for contestant notes.
+ *    → `rows` is optional; defaults to 3.
  *
- *  Use \u2014 for em-dash (—) and \u2019 for right single quote (').
+ *  ADDING A NEW EVENT
+ *  ─────────────────────────────────────────────────────────────
+ *  1. Copy an existing event object below as a template.
+ *  2. Assign the next id ("event-14"), number ("14"), and fill all fields.
+ *  3. Add a matching card to the experience overview in index.html:
+ *       <a class="exp-card" href="#event-14">
+ *         <div class="exp-num">14</div>
+ *         <div class="exp-label">Your Event Title</div>
+ *         <div class="exp-meta">Day · Venue</div>
+ *         <span class="exp-badge optional">Optional</span>
+ *       </a>
+ *  4. Update the REQUIRED count below if the total is no longer 13.
+ *  5. Run: python validate.py   — to confirm everything passes.
+ *
+ *  NOTE: The build system enforces exactly 13 events. If you add or
+ *  remove events, update the count check in build.py (line ~144).
  */
 
 const EVENTS = [
@@ -135,7 +154,7 @@ const EVENTS = [
         items: [
           'Government-issued photo ID',
           'Completed contestant forms (if not already submitted)',
-          'Your leather gear (clean, polished, ready)',
+          'Comfortable leather (clean, polished, ready)',
           'Any medical information your team should know',
         ],
         note: '',
@@ -143,7 +162,7 @@ const EVENTS = [
       {
         type: 'callout',
         label: 'Remember',
-        text: 'This is your first impression on the IML team and on your fellow contestants. Arrive on time, be present, and introduce yourself warmly.',
+        text: 'This is your first impression on the IMLBB team and on your fellow contestants. Arrive on time, be present, and introduce yourself warmly.',
       },
     ],
     rightCol: [
