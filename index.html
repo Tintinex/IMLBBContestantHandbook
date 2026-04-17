@@ -863,7 +863,7 @@
         min-height: 11in !important;
         height: 11in !important;
         overflow: hidden !important;
-        padding: 0.15in 0.45in 0.2in !important;
+        padding: 0.28in 0.52in 0.3in !important;
         box-sizing: border-box !important;
         page-break-before: always !important;
         break-before: page !important;
@@ -872,47 +872,69 @@
         display: flex !important;
         flex-direction: column !important;
       }
-      /* Section label appears above event 01's header */
+      /* Section label above event 01's header */
       #events > .event-block:first-child::before {
         content: 'SECTION 7  \2022  EVENTS IN DETAIL';
         display: block !important;
-        font-size: 6pt !important;
+        font-size: 7pt !important;
         letter-spacing: 4pt !important;
         text-transform: uppercase !important;
         color: rgba(255,255,255,.35) !important;
-        margin-bottom: 8pt !important;
+        margin-bottom: 10pt !important;
         flex-shrink: 0 !important;
       }
       .event-header {
         flex-shrink: 0 !important;
-        margin-bottom: 12pt !important;
-        padding-bottom: 10pt !important;
-        gap: 14pt !important;
+        margin-bottom: 18pt !important;
+        padding-bottom: 14pt !important;
+        gap: 18pt !important;
       }
       .event-num-badge {
-        width: 34pt !important;
-        height: 34pt !important;
-        font-size: 13pt !important;
+        width: 48pt !important;
+        height: 48pt !important;
+        font-size: 18pt !important;
         flex-shrink: 0 !important;
       }
-      .event-title { font-size: 15pt !important; margin-bottom: 2pt !important; }
-      .event-sub   { font-size: 7pt !important; letter-spacing: 1.5pt !important; }
-      .badge       { font-size: 5.5pt !important; padding: 1.5pt 6pt !important; letter-spacing: 1.5pt !important; }
-      .badge-row   { margin-top: 5pt !important; gap: 5pt !important; }
+      .event-title { font-size: 26pt !important; margin-bottom: 4pt !important; }
+      .event-sub   { font-size: 9.5pt !important; letter-spacing: 2pt !important; }
+      .badge       { font-size: 7pt !important; padding: 2.5pt 9pt !important; letter-spacing: 1.5pt !important; }
+      .badge-row   { margin-top: 7pt !important; gap: 6pt !important; }
+
+      /* Body: grid stretches both columns to the full remaining page height.
+         Each column is a flex container with space-between so its Q&A blocks
+         are distributed evenly from top to bottom — filling the whole page. */
       .event-body {
+        display: grid !important;
         flex: 1 !important;
+        min-height: 0 !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 16pt 28pt !important;
-        align-content: space-between !important;
+        gap: 0 48pt !important;
+        align-content: start !important;
+        align-items: stretch !important;  /* columns span full remaining height */
       }
-      .event-qa    { margin-bottom: 10pt !important; }
-      .event-q     { font-size: 6.5pt !important; letter-spacing: 1.5pt !important; margin-bottom: 4pt !important; }
-      .event-a     { font-size: 8pt !important; line-height: 1.58 !important; }
-      .event-checklist li { font-size: 8pt !important; line-height: 1.5 !important; padding: 2pt 0 !important; gap: 7pt !important; }
-      .event-checklist li::before { font-size: 10pt !important; }
-      .callout-box { padding: 9pt 11pt !important; margin-top: 8pt !important; }
-      .callout-label { font-size: 6.5pt !important; margin-bottom: 5pt !important; }
-      .callout-text  { font-size: 7.5pt !important; line-height: 1.55 !important; }
+      .event-col {
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;   /* sections distributed top-to-bottom */
+        overflow: visible !important;
+        /* subtle vertical rule on the right column */
+      }
+      .event-col + .event-col {
+        border-left: 1pt solid rgba(255,255,255,0.1) !important;
+        padding-left: 48pt !important;
+      }
+
+      /* Content — significantly larger than before */
+      .event-qa    { margin-bottom: 0 !important; }   /* spacing via space-between */
+      .event-q     { font-size: 8.5pt !important; letter-spacing: 1.5pt !important; margin-bottom: 7pt !important; color: #5b8fe8 !important; }
+      .event-a     { font-size: 12pt !important; line-height: 1.75 !important; color: rgba(255,255,255,0.88) !important; }
+      .event-checklist { margin-top: 8pt !important; }
+      .event-checklist li { font-size: 11.5pt !important; line-height: 1.65 !important; padding: 5pt 0 !important; gap: 10pt !important; color: rgba(255,255,255,0.88) !important; }
+      .event-checklist li::before { font-size: 14pt !important; color: #5b8fe8 !important; }
+      .event-checklist .event-a { margin-top: 10pt !important; }
+      .callout-box { padding: 14pt 18pt !important; margin-top: 0 !important; }
+      .callout-label { font-size: 8pt !important; margin-bottom: 8pt !important; color: #5b8fe8 !important; }
+      .callout-text  { font-size: 11pt !important; line-height: 1.7 !important; color: rgba(255,255,255,0.88) !important; }
 
       /* ══════════════════════════════
          FIRST WIVES CLUB  — one page
@@ -941,25 +963,33 @@
       .prep-questions li { margin-bottom: 10pt !important; }
 
       /* ══════════════════════════════
-         CODE OF CONDUCT
-         Each coc-sub = one full page
+         CODE OF CONDUCT  — Section 9
+         Page 1 : section header + intro + coc-ethics (first coc-sub)
+         Page 2 : coc-core-values
+         Page 3 : coc-volunteer
+         Page 4 : coc-why-ethics  (own full page, 1-col stacked layout)
+         Page 5 : coc-weekend
       ══════════════════════════════ */
       #code-of-conduct {
-        padding: 0 0.45in !important;
+        padding: 0 0.52in !important;
         page-break-before: always !important;
         break-before: page !important;
-        /* page 1 = section header + intro + first coc-sub (flex column) */
         width: 8.5in !important;
         box-sizing: border-box !important;
       }
-      .coc-intro { font-size: 8.5pt !important; margin-bottom: 10pt !important; flex-shrink: 0 !important; }
+      .coc-intro {
+        font-size: 13pt !important;
+        line-height: 1.78 !important;
+        margin-bottom: 20pt !important;
+        flex-shrink: 0 !important;
+      }
 
       /* Every sub-section fills exactly one page */
       .coc-sub {
         width: 8.5in !important;
         height: 11in !important;
-        padding: 0.15in 0.45in 0.2in !important;
-        margin-left: -0.45in !important;
+        padding: 0.28in 0.52in 0.3in !important;
+        margin-left: -0.52in !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
         page-break-before: always !important;
@@ -970,7 +1000,7 @@
         display: flex !important;
         flex-direction: column !important;
       }
-      /* First sub: section header + coc-intro sit above it on page 1 */
+      /* First sub shares page 1 with section header + intro */
       #code-of-conduct > .coc-sub:first-child {
         page-break-before: avoid !important;
         break-before: avoid !important;
@@ -979,58 +1009,90 @@
         flex: 1 !important;
         padding-top: 0 !important;
       }
-      /* "Why ethics matter" has only 3 items — use 3-column layout so
-         items fill one row and the page is used effectively */
+
+      /* "Why ethics matters" — own full page, 1-column stacked layout so
+         the 3 items read as a flowing narrative and fill the page height */
       #coc-why-ethics .coc-def-list {
-        grid-template-columns: repeat(3, 1fr) !important;
+        grid-template-columns: 1fr !important;
+        gap: 16pt !important;
       }
-      /* "Why ethics matter" + "IML Weekend" on the same page
-         (they're related and "Why" is short) */
+      #coc-why-ethics .coc-def-item {
+        padding: 26pt 30pt !important;
+      }
+      #coc-why-ethics .coc-def-term {
+        font-size: 13pt !important;
+        letter-spacing: 2pt !important;
+        margin-bottom: 14pt !important;
+      }
+      #coc-why-ethics .coc-def-desc {
+        font-size: 13pt !important;
+        line-height: 1.78 !important;
+      }
+
+      /* "IML Weekend" gets its own full page */
       #coc-weekend {
-        page-break-before: avoid !important;
-        break-before: avoid !important;
+        page-break-before: always !important;
+        break-before: always !important;
       }
 
-      .coc-sub-title { font-size: 7pt !important; letter-spacing: 3pt !important; padding-bottom: 8pt !important; margin-bottom: 14pt !important; flex-shrink: 0 !important; }
-      .coc-sub-lead  { font-size: 8pt !important; line-height: 1.65 !important; margin-bottom: 10pt !important; flex-shrink: 0 !important; }
+      /* ── Section typography ── */
+      .coc-sub-title {
+        font-size: 9pt !important;
+        letter-spacing: 4pt !important;
+        padding-bottom: 12pt !important;
+        margin-bottom: 18pt !important;
+        flex-shrink: 0 !important;
+      }
+      .coc-sub-lead {
+        font-size: 11pt !important;
+        line-height: 1.78 !important;
+        margin-bottom: 14pt !important;
+        flex-shrink: 0 !important;
+      }
 
-      /* Grids stretch to fill remaining flex space */
+      /* ── Ethics & Core Values (2 cols × 3 rows, cards stretch to fill) ── */
       .coc-values-grid {
         flex: 1 !important;
         display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 7pt !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12pt !important;
         align-content: stretch !important;
       }
-      .coc-value-card { padding: 10pt 11pt !important; }
-      .coc-value-num  { font-size: 18pt !important; margin-bottom: 4pt !important; }
-      .coc-value-label { font-size: 6.5pt !important; letter-spacing: 1.5pt !important; margin-bottom: 5pt !important; }
-      .coc-value-text  { font-size: 7.5pt !important; line-height: 1.55 !important; }
+      .coc-value-card  { padding: 20pt 24pt !important; }
+      .coc-value-num   { font-size: 30pt !important; margin-bottom: 8pt !important; }
+      .coc-value-label { font-size: 8.5pt !important; letter-spacing: 1.5pt !important; margin-bottom: 9pt !important; }
+      .coc-value-text  { font-size: 11pt !important; line-height: 1.7 !important; }
+
+      /* ── Volunteer Standards (2 cols × 4 rows) ── */
       .coc-def-list {
         flex: 1 !important;
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 7pt !important;
+        gap: 12pt !important;
         align-content: stretch !important;
       }
-      .coc-def-item { padding: 9pt 11pt !important; page-break-inside: avoid !important; break-inside: avoid !important; }
-      .coc-def-term { font-size: 6.5pt !important; letter-spacing: 1.5pt !important; margin-bottom: 5pt !important; }
-      .coc-def-desc { font-size: 7.5pt !important; line-height: 1.55 !important; }
+      .coc-def-item { padding: 18pt 22pt !important; }
+      .coc-def-term { font-size: 8.5pt !important; letter-spacing: 1.5pt !important; margin-bottom: 9pt !important; }
+      .coc-def-desc { font-size: 11pt !important; line-height: 1.7 !important; }
+
+      /* ── Weekend CoC cards (2 cols × 3 rows) ── */
       .coc-grid {
         flex: 1 !important;
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 7pt !important;
+        gap: 10pt !important;
         align-content: stretch !important;
       }
-      .coc-card { padding: 10pt 12pt !important; page-break-inside: avoid !important; break-inside: avoid !important; }
-      .coc-icon  { font-size: 16pt !important; margin-bottom: 6pt !important; }
-      .coc-title { font-size: 7.5pt !important; margin-bottom: 6pt !important; letter-spacing: 1.5pt !important; }
-      .coc-text  { font-size: 7.5pt !important; line-height: 1.55 !important; }
-      .coc-alert p { font-size: 7.5pt !important; }
-      .coc-contact { padding: 10pt 12pt !important; gap: 20pt !important; margin-top: 10pt !important; flex-shrink: 0 !important; }
-      .coc-contact-label { font-size: 6.5pt !important; margin-bottom: 4pt !important; }
-      .coc-contact-value { font-size: 8.5pt !important; }
+      .coc-card  { padding: 14pt 18pt !important; }
+      .coc-icon  { font-size: 18pt !important; margin-bottom: 8pt !important; }
+      .coc-title { font-size: 8.5pt !important; margin-bottom: 8pt !important; letter-spacing: 1.5pt !important; }
+      .coc-text  { font-size: 10pt !important; line-height: 1.65 !important; }
+      .coc-alert p { font-size: 10pt !important; line-height: 1.65 !important; }
+
+      /* ── Contact bar ── */
+      .coc-contact       { padding: 14pt 18pt !important; gap: 28pt !important; margin-top: 12pt !important; flex-shrink: 0 !important; }
+      .coc-contact-label { font-size: 7.5pt !important; letter-spacing: 2pt !important; margin-bottom: 5pt !important; }
+      .coc-contact-value { font-size: 10.5pt !important; }
 
       /* ══════════════════════════════
          CLOSING  — one page
