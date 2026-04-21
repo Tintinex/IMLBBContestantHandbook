@@ -24,6 +24,8 @@
   <script src="data/welcome.js"></script>
   <script src="data/letters.js"></script>
   <script src="data/events.js"></script>
+  <script src="data/judges.js"></script>
+  <script src="data/tallymasters.js"></script>
   <script src="data/team.js"></script>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -185,8 +187,16 @@
     .c-bio { font-size:clamp(14px,1.4vw,17px); line-height:1.78;
       color:var(--off-white); }
 
-    /* ── JUDGES ── */
-    #judges, #tallymasters { padding:0 5vw 80px; border-top:1px solid var(--border); }
+    /* ── JUDGES (Section 3) — uses contestant page-block layout ── */
+    #judges { padding:0; border-top:1px solid var(--border); }
+    /* screen: no extra bottom padding on s-header — page-blocks follow directly */
+    #judges > .s-header { padding-bottom:0; }
+    /* screen: running header on subsequent judge pages */
+    #judges .page-block-header { color:var(--blue-light); }
+
+    /* ── TALLYMASTERS ── */
+    #tallymasters { padding:0; border-top:1px solid var(--border); }
+    #tallymasters > .s-header { padding-bottom:0; }
     .judges-grid { display:grid;
       grid-template-columns:repeat(auto-fill,minmax(330px,1fr)); gap:24px; }
     .judge-card {
@@ -516,7 +526,7 @@
         margin: 0 !important;
         padding: 0 !important;
         width: 8.5in !important;
-        font-size: 9pt !important;
+        font-size: 12pt !important;
         overflow: visible !important;
       }
 
@@ -575,7 +585,7 @@
         line-height: 0.9 !important;
       }
       .cover-divider { margin: 18pt auto !important; }
-      .cover-meta { font-size: 10pt !important; line-height: 2.4 !important; }
+      .cover-meta { font-size: 12pt !important; line-height: 2.4 !important; }
 
       /* ══════════════════════════════
          CLASS PHOTO GRID  — one exact page
@@ -745,45 +755,61 @@
       .c-name      { font-size: 20pt !important; line-height: 1.0 !important; letter-spacing: -0.5pt !important; }
       .c-flag      { font-size: 18pt !important; }
       .c-title-tag { font-size: 6.5pt !important; letter-spacing: 2pt !important; margin-bottom: 6pt !important; }
-      .c-bio       { font-size: 8pt !important; line-height: 1.6 !important; }
+      .c-bio       { font-size: 12pt !important; line-height: 1.6 !important; }
       .c-text      { padding-top: 2pt !important; }
       .c-name-row  { margin-bottom: 6pt !important; }
 
       /* ══════════════════════════════
-         JUDGES
+         JUDGES — section title + 3-per-page contestant layout
+         s-header (0.52in) + margin (0.12in) + first page-block (10.36in) = 11in
       ══════════════════════════════ */
       #judges {
+        padding: 0 !important;
         page-break-before: always !important;
         break-before: page !important;
-        padding: 0 0.45in 0.3in !important;
       }
-      .judges-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8pt !important;
+      /* Section title — compact, centred, matches team-grid treatment */
+      #judges > .s-header {
+        height: 0.52in !important;
+        padding: 0 !important;
+        margin-bottom: 0.12in !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
       }
-      .judge-card {
-        grid-template-columns: 68pt 1fr !important;
-        gap: 10pt !important;
-        padding: 10pt !important;
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
+      /* First page-block: shares the opening page with the s-header above */
+      #judges .page-block:first-child {
+        page-break-before: avoid !important;
+        break-before: avoid !important;
+        height: 10.36in !important;
+        min-height: 10.36in !important;
       }
-      .judge-photo-wrap { width: 68pt !important; }
-      .judge-name     { font-size: 10pt !important; margin: 0 !important; }
-      .judge-bio      { font-size: 7.5pt !important; line-height: 1.5 !important; margin-top: 2pt !important; }
-      .judge-tag      { font-size: 6.5pt !important; }
-      .judge-location { font-size: 6.5pt !important; }
-      .judge-link     { display: none !important; }
-      .judge-body     { gap: 4pt !important; }
 
       /* ══════════════════════════════
-         TALLYMASTERS
+         TALLYMASTERS — mirrors judges layout
       ══════════════════════════════ */
       #tallymasters {
+        padding: 0 !important;
         page-break-before: always !important;
         break-before: page !important;
-        padding: 0 0.45in 0.3in !important;
+      }
+      #tallymasters > .s-header {
+        height: 0.52in !important;
+        padding: 0 !important;
+        margin-bottom: 0.12in !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+      #tallymasters .page-block:first-child {
+        page-break-before: avoid !important;
+        break-before: avoid !important;
+        height: 10.36in !important;
+        min-height: 10.36in !important;
       }
 
       /* ══════════════════════════════
@@ -805,14 +831,14 @@
       }
       .tm-photo-wrap { width: 1.3in !important; }
       .tm-name     { font-size: 16pt !important; letter-spacing: -0.5pt !important; margin-bottom: 8pt !important; }
-      .tm-bio      { font-size: 7.5pt !important; line-height: 1.6 !important; }
+      .tm-bio      { font-size: 12pt !important; line-height: 1.6 !important; }
       .tm-role-tag { font-size: 6.5pt !important; letter-spacing: 2pt !important; margin-bottom: 6pt !important; }
       .tm-compact-grid {
         grid-template-columns: repeat(5, 1fr) !important;
         gap: 6pt !important;
       }
       .tm-compact-card { padding: 8pt 10pt !important; }
-      .tm-compact-name { font-size: 9pt !important; }
+      .tm-compact-name { font-size: 12pt !important; }
       .tm-compact-role { font-size: 6pt !important; }
 
       /* ══════════════════════════════
@@ -831,7 +857,7 @@
         break-after: page !important;
       }
       #experience .s-header { flex-shrink: 0 !important; }
-      .exp-intro { font-size: 8.5pt !important; line-height: 1.65 !important; margin-bottom: 14pt !important; flex-shrink: 0 !important; }
+      .exp-intro { font-size: 12pt !important; line-height: 1.65 !important; margin-bottom: 14pt !important; flex-shrink: 0 !important; }
       .exp-grid {
         flex: 1 !important;
         grid-template-columns: repeat(4, 1fr) !important;
@@ -840,8 +866,8 @@
       }
       .exp-card  { padding: 9pt 10pt 8pt !important; }
       .exp-num   { font-size: 20pt !important; margin-bottom: 3pt !important; }
-      .exp-label { font-size: 7.5pt !important; margin-bottom: 4pt !important; }
-      .exp-meta  { font-size: 6.5pt !important; }
+      .exp-label { font-size: 12pt !important; margin-bottom: 4pt !important; }
+      .exp-meta  { font-size: 10pt !important; }
       .exp-badge { font-size: 5.5pt !important; padding: 1pt 5pt !important; margin-top: 5pt !important; }
 
       /* ══════════════════════════════
@@ -896,7 +922,7 @@
         flex-shrink: 0 !important;
       }
       .event-title { font-size: 26pt !important; margin-bottom: 4pt !important; }
-      .event-sub   { font-size: 9.5pt !important; letter-spacing: 2pt !important; }
+      .event-sub   { font-size: 12pt !important; letter-spacing: 2pt !important; }
       .badge       { font-size: 7pt !important; padding: 2.5pt 9pt !important; letter-spacing: 1.5pt !important; }
       .badge-row   { margin-top: 7pt !important; gap: 6pt !important; }
 
@@ -926,15 +952,15 @@
 
       /* Content — significantly larger than before */
       .event-qa    { margin-bottom: 0 !important; }   /* spacing via space-between */
-      .event-q     { font-size: 8.5pt !important; letter-spacing: 1.5pt !important; margin-bottom: 7pt !important; color: #5b8fe8 !important; }
+      .event-q     { font-size: 12pt !important; letter-spacing: 1.5pt !important; margin-bottom: 7pt !important; color: #5b8fe8 !important; }
       .event-a     { font-size: 12pt !important; line-height: 1.75 !important; color: rgba(255,255,255,0.88) !important; }
       .event-checklist { margin-top: 8pt !important; }
-      .event-checklist li { font-size: 11.5pt !important; line-height: 1.65 !important; padding: 5pt 0 !important; gap: 10pt !important; color: rgba(255,255,255,0.88) !important; }
+      .event-checklist li { font-size: 12pt !important; line-height: 1.65 !important; padding: 5pt 0 !important; gap: 10pt !important; color: rgba(255,255,255,0.88) !important; }
       .event-checklist li::before { font-size: 14pt !important; color: #5b8fe8 !important; }
       .event-checklist .event-a { margin-top: 10pt !important; }
       .callout-box { padding: 14pt 18pt !important; margin-top: 0 !important; }
       .callout-label { font-size: 8pt !important; margin-bottom: 8pt !important; color: #5b8fe8 !important; }
-      .callout-text  { font-size: 11pt !important; line-height: 1.7 !important; color: rgba(255,255,255,0.88) !important; }
+      .callout-text  { font-size: 12pt !important; line-height: 1.7 !important; color: rgba(255,255,255,0.88) !important; }
 
       /* ══════════════════════════════
          FIRST WIVES CLUB  — one page
@@ -954,12 +980,12 @@
         grid-template-columns: 1fr 3.1in !important;
         gap: 0.35in !important;
       }
-      .fwc-letter { font-size: 8.5pt !important; line-height: 1.75 !important; }
+      .fwc-letter { font-size: 13pt !important; line-height: 1.75 !important; }
       .fwc-letter p { margin-bottom: 9pt !important; }
-      .fwc-letter .letter-open { font-size: 8pt !important; margin-bottom: 14pt !important; }
-      .fwc-letter .letter-sign { margin-top: 14pt !important; font-size: 8pt !important; }
+      .fwc-letter .letter-open { font-size: 13pt !important; margin-bottom: 14pt !important; }
+      .fwc-letter .letter-sign { margin-top: 14pt !important; font-size: 12pt !important; }
       .fwc-sidebar h3 { font-size: 7pt !important; letter-spacing: 3pt !important; margin-bottom: 12pt !important; }
-      .prep-q-label { font-size: 7.5pt !important; margin-bottom: 4pt !important; }
+      .prep-q-label { font-size: 12pt !important; margin-bottom: 4pt !important; }
       .prep-questions li { margin-bottom: 10pt !important; }
 
       /* ══════════════════════════════
@@ -1044,7 +1070,7 @@
         flex-shrink: 0 !important;
       }
       .coc-sub-lead {
-        font-size: 11pt !important;
+        font-size: 12pt !important;
         line-height: 1.78 !important;
         margin-bottom: 14pt !important;
         flex-shrink: 0 !important;
@@ -1061,7 +1087,7 @@
       .coc-value-card  { padding: 20pt 24pt !important; }
       .coc-value-num   { font-size: 30pt !important; margin-bottom: 8pt !important; }
       .coc-value-label { font-size: 8.5pt !important; letter-spacing: 1.5pt !important; margin-bottom: 9pt !important; }
-      .coc-value-text  { font-size: 11pt !important; line-height: 1.7 !important; }
+      .coc-value-text  { font-size: 12pt !important; line-height: 1.7 !important; }
 
       /* ── Volunteer Standards (2 cols × 4 rows) ── */
       .coc-def-list {
@@ -1073,7 +1099,7 @@
       }
       .coc-def-item { padding: 18pt 22pt !important; }
       .coc-def-term { font-size: 8.5pt !important; letter-spacing: 1.5pt !important; margin-bottom: 9pt !important; }
-      .coc-def-desc { font-size: 11pt !important; line-height: 1.7 !important; }
+      .coc-def-desc { font-size: 12pt !important; line-height: 1.7 !important; }
 
       /* ── Weekend CoC cards (2 cols × 3 rows) ── */
       .coc-grid {
@@ -1086,13 +1112,13 @@
       .coc-card  { padding: 14pt 18pt !important; }
       .coc-icon  { font-size: 18pt !important; margin-bottom: 8pt !important; }
       .coc-title { font-size: 8.5pt !important; margin-bottom: 8pt !important; letter-spacing: 1.5pt !important; }
-      .coc-text  { font-size: 10pt !important; line-height: 1.65 !important; }
-      .coc-alert p { font-size: 10pt !important; line-height: 1.65 !important; }
+      .coc-text  { font-size: 12pt !important; line-height: 1.65 !important; }
+      .coc-alert p { font-size: 12pt !important; line-height: 1.65 !important; }
 
       /* ── Contact bar ── */
       .coc-contact       { padding: 14pt 18pt !important; gap: 28pt !important; margin-top: 12pt !important; flex-shrink: 0 !important; }
       .coc-contact-label { font-size: 7.5pt !important; letter-spacing: 2pt !important; margin-bottom: 5pt !important; }
-      .coc-contact-value { font-size: 10.5pt !important; }
+      .coc-contact-value { font-size: 12pt !important; }
 
       /* ══════════════════════════════
          CLOSING  — one page
@@ -1113,11 +1139,11 @@
       }
       .closing-eyebrow { font-size: 7pt !important; letter-spacing: 4pt !important; margin-bottom: 24pt !important; }
       .closing-quote   { font-size: 22pt !important; line-height: 1.2 !important; margin-bottom: 14pt !important; max-width: 7in !important; }
-      .closing-quote-attr { font-size: 8pt !important; margin-bottom: 36pt !important; }
+      .closing-quote-attr { font-size: 12pt !important; margin-bottom: 36pt !important; }
       .closing-divider { margin: 0 auto 36pt !important; }
       .closing-contact { gap: 36pt !important; margin-bottom: 36pt !important; flex-wrap: nowrap !important; }
       .closing-contact-label { font-size: 7pt !important; }
-      .closing-contact-value { font-size: 9pt !important; }
+      .closing-contact-value { font-size: 13pt !important; }
       .closing-credits { font-size: 7pt !important; letter-spacing: 1.5pt !important; line-height: 2 !important; }
 
       /* ══════════════════════════════
@@ -1393,9 +1419,9 @@
         justify-content: center !important;
       }
       .letter-eyebrow { font-size: 7pt !important; margin-bottom: 18pt !important; }
-      .letter-body { font-size: 10pt !important; line-height: 1.75 !important; }
+      .letter-body { font-size: 13pt !important; line-height: 1.75 !important; }
       .letter-body p { margin-bottom: 12pt !important; }
-      .letter-sign { font-size: 9pt !important; margin-top: 18pt !important; }
+      .letter-sign { font-size: 12pt !important; margin-top: 18pt !important; }
 
       #history {
         width: 8.5in !important; min-height: 11in !important;
@@ -1408,9 +1434,9 @@
       .founder-photo { width: 100% !important; aspect-ratio: 3/4 !important; max-height: 200pt !important; object-fit: cover !important; }
       .founder-card-body { padding: 12pt 14pt !important; }
       .founder-name { font-size: 16pt !important; }
-      .founder-bio { font-size: 8pt !important; }
+      .founder-bio { font-size: 12pt !important; }
       .founder-dates { font-size: 7pt !important; }
-      .history-body { font-size: 9pt !important; line-height: 1.7 !important; }
+      .history-body { font-size: 13pt !important; line-height: 1.7 !important; }
 
       #archive {
         width: 8.5in !important; min-height: 11in !important;
@@ -1436,7 +1462,7 @@
       .toc-list li { padding: 10pt 0 !important; }
       .toc-item-title { font-size: 14pt !important; }
       .toc-num { font-size: 7pt !important; }
-      .toc-note { font-size: 8pt !important; }
+      .toc-note { font-size: 12pt !important; }
 
       #venue {
         width: 8.5in !important; min-height: 11in !important;
@@ -1447,9 +1473,9 @@
       .venue-layout { grid-template-columns: 1fr 240pt !important; gap: 28pt !important; }
       .venue-name { font-size: 20pt !important; }
       .venue-address { font-size: 7pt !important; }
-      .venue-section-text { font-size: 8pt !important; line-height: 1.6 !important; }
+      .venue-section-text { font-size: 12pt !important; line-height: 1.6 !important; }
       .venue-section-label { font-size: 7pt !important; }
-      .callout-box-intro .callout-text { font-size: 8pt !important; }
+      .callout-box-intro .callout-text { font-size: 12pt !important; }
       .callout-box-intro .callout-label { font-size: 6pt !important; }
 
       #nearby {
@@ -1460,7 +1486,7 @@
       .nearby-grid { grid-template-columns: repeat(4,1fr) !important; gap: 6pt !important; }
       .nearby-card { padding: 8pt 10pt !important; }
       .nearby-type { font-size: 6pt !important; }
-      .nearby-name { font-size: 9pt !important; }
+      .nearby-name { font-size: 12pt !important; }
     }
 
   </style>
@@ -1733,120 +1759,7 @@
     <span class="s-num">Section 3</span>
     <h2 class="s-title">Your IML Judges</h2>
   </div>
-  <div class="judges-grid">
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/rene-hebert" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_481133f2631248febc20c634d632096b~mv2.png/v1/fill/w_400,h_600,al_c,q_85/Rene_Hebert.png" alt="Rene Hebert" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">International Mr. Leather 2025</span>
-        <h3 class="judge-name">Rene Hebert &nbsp;🇨🇦</h3>
-        <p class="judge-location">Montreal, Quebec, Canada</p>
-        <p class="judge-bio">Your Friendly Neighborhood Bootblack and International Mr. Leather 2025. Rene is a versatile switch who prioritizes connected experiences in play. An accomplished bootblack and kink educator with over 14 years at the stand — the first bootblack to win the IML title. When not bootblacking he can be found nerding out over card and video games, telling bad jokes, and singing along with showtunes in his car.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/antoin" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_c667d97025094d11b4936ec1b85e7781~mv2.png/v1/fill/w_400,h_600,al_c,q_85/Antoin.png" alt="Antoin" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">Judge</span>
-        <h3 class="judge-name">Antoin</h3>
-        <p class="judge-location">Global</p>
-        <p class="judge-bio">Brand Manager and Events Producer for Recon, a proud rubber man of colour well-known in the global fetish community for over 19 years. Through producing Recon's worldwide play parties, hosting the Recon Podcast and Kinky PoC panel, he's gained a deep understanding of community diversity. He has served on juries internationally and empowers everyone he meets to be their authentic selves.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/master-dart" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_de44bc254730498e8e2a0715cfb02455~mv2.png/v1/fill/w_400,h_600,al_c,q_85/MasterDart.png" alt="Master Dart" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">Judge</span>
-        <h3 class="judge-name">Master Dart</h3>
-        <p class="judge-bio">Visit the full profile on the IML website for Master Dart's complete biography and background.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/issa-arden" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_4e52d22fdb14446d8a1c93cb61bf68ce~mv2.jpg/v1/fill/w_400,h_600,al_c,q_85/Issa_Arden.jpg" alt="Issa Arden" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">Judge</span>
-        <h3 class="judge-name">Issa Arden</h3>
-        <p class="judge-bio">Issa Arden has been in leather and rubber for over 25 years. She serves on the Executive Committee and as head of Education for MIR. They curated exhibitions for the Leather Archives & Museum and were on ABW's board after serving as Contestant Coordinator, on IML's social media team, on staff for the Leather Hall of Fame, and held two Louisiana leather titles.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/lascivious-jane" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_ebef99d575f347cfb2939d6f7ae837d4~mv2.png/v1/fill/w_400,h_600,al_c,q_85/Lascivious_Jane.png" alt="Lascivious Jane" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">International Ms. Leather 2016</span>
-        <h3 class="judge-name">Lascivious Jane</h3>
-        <p class="judge-bio">International Ms. Leather 2016 and Ms. Philadelphia Leather 2015. Sex educator by day and kinky burlesquer by night — creator of Liberty City Kings Drag and Burlesque. A prominent MC and judge in the leather community, she brings humor, expertise, and fire to every stage she graces.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/jody-anderson" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_18ab3b73264943048425302f73bc6008~mv2.png/v1/fill/w_400,h_600,al_c,q_85/Jody_Anderson.png" alt="Jody Anderson" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">Judge</span>
-        <h3 class="judge-name">Jody Anderson</h3>
-        <p class="judge-bio">Visit the full profile on the IML website for Jody Anderson's complete biography and background.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/leonardo-iriarte" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_a71df1d3e8c241349daab0cb588e876e~mv2.png/v1/fill/w_400,h_600,al_c,q_85/Leonardo_Iriarte.png" alt="Leonardo Iriarte" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">Mr. Los Angeles Leather 2011</span>
-        <h3 class="judge-name">Leonardo Iriarte &nbsp;🇺🇸</h3>
-        <p class="judge-bio">Mr. Los Angeles Leather 2011 — the first Latino to hold the title. Leonardo has been an active member of the leather community for over a decade, organizing events and championing the visibility of Latinos in the leather scene. He brings a deep passion for community building and inclusivity to his role as judge.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/michael-byrne" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_a14309277be94b56bb016ef6927eed67~mv2.jpg/v1/fill/w_400,h_600,al_c,q_85/Michael_Byrne.jpg" alt="Michael Byrne" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">Mr. Dublin Leather 2001</span>
-        <h3 class="judge-name">Michael Byrne &nbsp;🇮🇪</h3>
-        <p class="judge-location">Dublin, Ireland</p>
-        <p class="judge-bio">A Queer activist for over 30 years, co-founder of L.U.B.E. Ireland (Leather Uniform Bear Encounter), co-producer of Dublin Leather Weekend and Den Daddy Mr. Dublin Leather. Michael competed at IML as Mr. Dublin Leather 2001 and has traveled to numerous Queer events worldwide to support a new generation of Leathermen.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/vince-andrews" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_a6696bae701a49d7a2823c905c66826e~mv2.png/v1/fill/w_400,h_600,al_c,q_85/Vince_Andrews.png" alt="Vince Andrews" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">Judge &amp; Author</span>
-        <h3 class="judge-name">Vince Andrews &nbsp;🇺🇸</h3>
-        <p class="judge-bio">Author of <em>The Leather and BDSM Handbook</em> — a comprehensive guide to the leather lifestyle. Vince has spent years as a custom leather maker, creating sashes and title patches for titleholders across the Midwest. His knowledge spans both the craft and the culture of leather.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-  </div>
+  <div id="judges-container"><!-- rendered by renderJudges() from data/judges.js --></div>
 </section>
 
 <!-- ── TALLYMASTERS ── -->
@@ -1855,32 +1768,7 @@
     <span class="s-num">Section 4</span>
     <h2 class="s-title">Tallymasters</h2>
   </div>
-  <div class="judges-grid">
-
-    <a class="judge-card" href="https://www.internationalmrleather.com/judges/cluff-reyes-26" target="_blank" rel="noopener">
-      <div class="judge-photo-wrap">
-        <img src="https://static.wixstatic.com/media/dc9023_a65592450f314d198b9f24aa17fcd088~mv2.png/v1/fill/w_400,h_600,al_c,q_85/Cluff_Reyes.png" alt="Cluff Reyes" loading="eager">
-      </div>
-      <div class="judge-body">
-        <span class="judge-tag">Tallymaster</span>
-        <h3 class="judge-name">Cluff Reyes &nbsp;🇺🇸</h3>
-        <p class="judge-location">Cleveland, Ohio, United States</p>
-        <p class="judge-bio">Mr. Jock 2012 and Mr. Stud 2012. A member of Delta Brotherhood International and Associate Member of the Chicago Hellfire Club, Cluff has been involved in the leather community for over twenty years. His ongoing personal mission is helping others discover and thrive in their kinks while building his leather family. Outside of leather: technology, motorcycles, and camping.</p>
-        <span class="judge-link">Full profile →</span>
-      </div>
-    </a>
-
-    <div class="judge-card" style="cursor:default;">
-      <div class="judge-photo-wrap" style="background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:42px;">🏅</div>
-      <div class="judge-body">
-        <span class="judge-tag">Tallymaster</span>
-        <h3 class="judge-name">Omar Hekal &nbsp;🇺🇸</h3>
-        <p class="judge-location">Woodridge, New Jersey, United States</p>
-        <p class="judge-bio">Founder of Allegro Arts Academy, a performing arts studio in Carlstadt, New Jersey. Omar has performed in Broadway Bares to benefit Broadway Cares/Equity Fights AIDS. He has been an IML contestant handler and is excited to return as Tally Master, dedicated to promoting artistic expression and a well-rounded spirit to succeed in every aspect of life.</p>
-      </div>
-    </div>
-
-  </div>
+  <div id="tallymasters-container"><!-- rendered by renderTallymasters() from data/tallymasters.js --></div>
 </section>
 
 <!-- ── TEAM PHOTO GRID ── -->
@@ -2460,6 +2348,8 @@ async function init() {
   const contestants = buildContestants(EMBEDDED);
   renderGrid(contestants);
   renderProfiles(contestants);
+  renderJudges();        /* judges immediately follow contestant pages */
+  renderTallymasters();  /* tallymasters follow judges */
 
   /* Then attempt a live refresh in the background */
   try {
@@ -2485,6 +2375,8 @@ async function init() {
     if (live.length !== contestants.length) {
       renderGrid(live);
       renderProfiles(live);
+      renderJudges();
+      renderTallymasters();
     }
   } catch (_) { /* live refresh failed silently, embedded data stays */ }
 }
@@ -2625,6 +2517,229 @@ function renderProfiles(list) {
         bioEl.className = 'c-bio';
         bioEl.textContent = c.bio;
         text.appendChild(bioEl);
+      }
+
+      entry.appendChild(photoWrap);
+      entry.appendChild(text);
+      trioWrap.appendChild(entry);
+    });
+
+    block.appendChild(trioWrap);
+    container.appendChild(block);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   renderJudges()
+   Reads JUDGES from data/judges.js and builds judge profile pages
+   using the same page-block / contestant-entry layout as contestants.
+   3 judges per page.  To add/edit judges, edit data/judges.js only.
+══════════════════════════════════════════════════════════════ */
+function renderJudges() {
+  const container = document.getElementById('judges-container');
+  if (!container || typeof JUDGES === 'undefined' || !JUDGES.length) return;
+  container.innerHTML = '';
+
+  chunk(JUDGES, 3).forEach((trio, pi) => {
+    const block = document.createElement('div');
+    block.className = 'page-block';
+
+    /* First page: section title lives in the static s-header above the container.
+       Subsequent pages get the small running header so readers know where they are. */
+    if (pi > 0) {
+      const header = document.createElement('div');
+      header.className = 'page-block-header';
+      header.textContent = `SECTION 3  \u00b7  YOUR IML JUDGES`;
+      block.appendChild(header);
+    }
+
+    const trioWrap = document.createElement('div');
+    trioWrap.className = 'contestant-trio';
+
+    trio.forEach(j => {
+      const entry = document.createElement('div');
+      entry.className = 'contestant-entry';
+
+      /* ── Photo ── */
+      const photoWrap = document.createElement('div');
+      photoWrap.className = 'c-photo-wrap';
+
+      if (j.photo) {
+        const img = document.createElement('img');
+        img.src = j.photo;
+        img.alt = j.name;
+        img.loading = 'eager';
+        const ph = document.createElement('div');
+        ph.className = 'c-photo-placeholder hidden';
+        ph.textContent = '\u2696\uFE0F';
+        img.addEventListener('error', () => {
+          img.style.display = 'none';
+          ph.classList.remove('hidden');
+        });
+        photoWrap.appendChild(img);
+        photoWrap.appendChild(ph);
+      } else {
+        const ph = document.createElement('div');
+        ph.className = 'c-photo-placeholder';
+        ph.textContent = '\u2696\uFE0F';
+        photoWrap.appendChild(ph);
+      }
+
+      /* ── Text ── */
+      const text = document.createElement('div');
+      text.className = 'c-text';
+
+      const nameRow = document.createElement('div');
+      nameRow.className = 'c-name-row';
+
+      const nameEl = document.createElement('h2');
+      nameEl.className = 'c-name';
+      nameEl.textContent = j.name;
+      nameRow.appendChild(nameEl);
+
+      if (j.flag) {
+        const flagEl = document.createElement('span');
+        flagEl.className = 'c-flag';
+        flagEl.textContent = '\u00a0' + j.flag;
+        nameRow.appendChild(flagEl);
+      }
+      text.appendChild(nameRow);
+
+      /* Title tag: role · location (if present) */
+      const tagLine = [j.title, j.location].filter(Boolean).join(' \u00b7 ');
+      if (tagLine) {
+        const tag = document.createElement('p');
+        tag.className = 'c-title-tag';
+        tag.textContent = tagLine;
+        text.appendChild(tag);
+      }
+
+      if (j.bio) {
+        const bioEl = document.createElement('p');
+        bioEl.className = 'c-bio';
+        bioEl.textContent = j.bio;
+        text.appendChild(bioEl);
+      }
+
+      /* Link (screen only — hidden in print via existing .judge-link rule) */
+      if (j.url) {
+        const link = document.createElement('a');
+        link.className = 'judge-link';
+        link.href = j.url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = 'Full profile \u2192';
+        text.appendChild(link);
+      }
+
+      entry.appendChild(photoWrap);
+      entry.appendChild(text);
+      trioWrap.appendChild(entry);
+    });
+
+    block.appendChild(trioWrap);
+    container.appendChild(block);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   renderTallymasters()
+   Reads TALLYMASTERS from data/tallymasters.js — same layout as judges.
+   Edit data/tallymasters.js to add/change tallymasters each year.
+══════════════════════════════════════════════════════════════ */
+function renderTallymasters() {
+  const container = document.getElementById('tallymasters-container');
+  if (!container || typeof TALLYMASTERS === 'undefined' || !TALLYMASTERS.length) return;
+  container.innerHTML = '';
+
+  chunk(TALLYMASTERS, 3).forEach((trio, pi) => {
+    const block = document.createElement('div');
+    block.className = 'page-block';
+
+    /* First page: section title in static s-header handles the heading.
+       Subsequent pages get the small running header. */
+    if (pi > 0) {
+      const header = document.createElement('div');
+      header.className = 'page-block-header';
+      header.textContent = `SECTION 4  \u00b7  TALLYMASTERS`;
+      block.appendChild(header);
+    }
+
+    const trioWrap = document.createElement('div');
+    trioWrap.className = 'contestant-trio';
+
+    trio.forEach(t => {
+      const entry = document.createElement('div');
+      entry.className = 'contestant-entry';
+
+      /* ── Photo ── */
+      const photoWrap = document.createElement('div');
+      photoWrap.className = 'c-photo-wrap';
+
+      if (t.photo) {
+        const img = document.createElement('img');
+        img.src = t.photo;
+        img.alt = t.name;
+        img.loading = 'eager';
+        const ph = document.createElement('div');
+        ph.className = 'c-photo-placeholder hidden';
+        ph.textContent = '\uD83C\uDFC5';
+        img.addEventListener('error', () => {
+          img.style.display = 'none';
+          ph.classList.remove('hidden');
+        });
+        photoWrap.appendChild(img);
+        photoWrap.appendChild(ph);
+      } else {
+        const ph = document.createElement('div');
+        ph.className = 'c-photo-placeholder';
+        ph.textContent = '\uD83C\uDFC5';
+        photoWrap.appendChild(ph);
+      }
+
+      /* ── Text ── */
+      const text = document.createElement('div');
+      text.className = 'c-text';
+
+      const nameRow = document.createElement('div');
+      nameRow.className = 'c-name-row';
+
+      const nameEl = document.createElement('h2');
+      nameEl.className = 'c-name';
+      nameEl.textContent = t.name;
+      nameRow.appendChild(nameEl);
+
+      if (t.flag) {
+        const flagEl = document.createElement('span');
+        flagEl.className = 'c-flag';
+        flagEl.textContent = '\u00a0' + t.flag;
+        nameRow.appendChild(flagEl);
+      }
+      text.appendChild(nameRow);
+
+      const tagLine = [t.title, t.location].filter(Boolean).join(' \u00b7 ');
+      if (tagLine) {
+        const tag = document.createElement('p');
+        tag.className = 'c-title-tag';
+        tag.textContent = tagLine;
+        text.appendChild(tag);
+      }
+
+      if (t.bio) {
+        const bioEl = document.createElement('p');
+        bioEl.className = 'c-bio';
+        bioEl.textContent = t.bio;
+        text.appendChild(bioEl);
+      }
+
+      if (t.url) {
+        const link = document.createElement('a');
+        link.className = 'judge-link';
+        link.href = t.url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = 'Full profile \u2192';
+        text.appendChild(link);
       }
 
       entry.appendChild(photoWrap);

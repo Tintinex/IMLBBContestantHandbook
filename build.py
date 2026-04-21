@@ -44,6 +44,8 @@ DATA_FILES = [
     'welcome.js',
     'letters.js',
     'events.js',
+    'judges.js',
+    'tallymasters.js',
     'team.js',
 ]
 
@@ -151,6 +153,18 @@ def validate_data():
         err('EVENTS array is empty in data/events.js — add at least one event.')
     else:
         info(f'  EVENTS = {event_count}')
+
+    judge_count = count_array_items('JUDGES', combined)
+    if judge_count == 0:
+        err('JUDGES array is empty in data/judges.js — add at least one judge.')
+    else:
+        info(f'  JUDGES = {judge_count}')
+
+    tm_count = count_array_items('TALLYMASTERS', combined)
+    if tm_count == 0:
+        err('TALLYMASTERS array is empty in data/tallymasters.js — add at least one tallymaster.')
+    else:
+        info(f'  TALLYMASTERS = {tm_count}')
 
     team_count = count_array_items('TEAM_MEMBERS', combined)
     if team_count == 0:
