@@ -18,13 +18,5 @@ const TALLYMASTERS = [
     photo:    'https://static.wixstatic.com/media/dc9023_a65592450f314d198b9f24aa17fcd088~mv2.png/v1/fill/w_400,h_600,al_c,q_85/Cluff_Reyes.png',
     url:      'https://www.internationalmrleather.com/judges/cluff-reyes-26',
   },
-  {
-    name:     'Omar Hekal',
-    flag:     '🇺🇸',
-    title:    'Tallymaster',
-    location: 'Woodridge, New Jersey, United States',
-    bio:      'Founder of Allegro Arts Academy, a performing arts studio in Carlstadt, New Jersey. Omar has performed in Broadway Bares to benefit Broadway Cares/Equity Fights AIDS. He has been an IML contestant handler and is excited to return as Tally Master, dedicated to promoting artistic expression and a well-rounded spirit to succeed in every aspect of life.',
-    photo:    '',
-    url:      '',
-  },
+
 ];
