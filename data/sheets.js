@@ -1,7 +1,7 @@
 /**
  * ╔══════════════════════════════════════════════════════════╗
  * ║  SECTION: GOOGLE SHEETS                                  ║
- * ║  Owner:   IML Registration / Data team                  ║
+ * ║  Owner:   IMLBB Registration / Data team                  ║
  * ║  Update:  When registration spreadsheets change          ║
  * ╚══════════════════════════════════════════════════════════╝
  *

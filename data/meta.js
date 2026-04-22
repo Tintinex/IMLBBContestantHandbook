@@ -1,7 +1,7 @@
 /**
  * ╔══════════════════════════════════════════════════════════╗
  * ║  SECTION: EDITION META                                   ║
- * ║  Owner:   IML Logistics / Communications                 ║
+ * ║  Owner:   IMLBB Logistics / Communications                 ║
  * ║  Update:  First thing — drives the title, footers, etc. ║
  * ╚══════════════════════════════════════════════════════════╝
  */

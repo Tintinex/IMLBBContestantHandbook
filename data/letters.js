@@ -87,7 +87,7 @@ const LETTERS = [
     id: 'letter-imbb-ed',
     eyebrow: 'A message from the IMBB Executive Director',
     paragraphs: [
-      'To the IML 2026 Class,',
+      'To the IMLBB 2026 Class,',
 
       'A message from Becky will go here.',
     ],
@@ -99,7 +99,7 @@ const LETTERS = [
 
 /* ─────────────────────────────────────────────────────────────
    FIRST WIVES' CLUB LETTER
-   Owner: First Wives team / IML Communications
+   Owner: First Wives team / IMLBB Communications
    Shown in the dedicated First Wives' Club section.
    ───────────────────────────────────────────────────────────── */
 const FIRST_WIVES_LETTER = {
