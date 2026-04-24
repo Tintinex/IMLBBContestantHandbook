@@ -34,7 +34,8 @@ BASE      = Path(__file__).parent
 DIST      = BASE / 'dist'
 SRC       = BASE / 'index.html'
 DATA_DIR  = BASE / 'data'
-LOGO_EXTS = ['IMLBBLogo.jpg', 'IMLBBLogo.avif', 'IMLBBLogo.png', 'IMBBLogo_white.jpg']
+LOGO_EXTS = ['IMLBBLogo.jpg', 'IMLBBLogo.avif', 'IMLBBLogo.png', 'IMBBLogo_white.jpg',
+             'founder_chuck.jpg', 'founder_dom.jpg']
 
 # Ordered load sequence — must match the order <script> tags appear in index.html
 DATA_FILES = [
