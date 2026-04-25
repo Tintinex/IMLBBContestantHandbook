@@ -45,6 +45,7 @@ DATA_FILES = [
     'welcome.js',
     'letters.js',
     'events.js',
+    'imbb_judges.js',
     'judges.js',
     'tallymasters.js',
     'team.js',
@@ -154,6 +155,12 @@ def validate_data():
         err('EVENTS array is empty in data/events.js — add at least one event.')
     else:
         info(f'  EVENTS = {event_count}')
+
+    imbb_judge_count = count_array_items('IMBB_JUDGES', combined)
+    if imbb_judge_count == 0:
+        err('IMBB_JUDGES array is empty in data/imbb_judges.js — add at least one IMBB judge.')
+    else:
+        info(f'  IMBB_JUDGES = {imbb_judge_count}')
 
     judge_count = count_array_items('JUDGES', combined)
     if judge_count == 0:

@@ -24,6 +24,7 @@
   <script src="data/welcome.js"></script>
   <script src="data/letters.js"></script>
   <script src="data/events.js"></script>
+  <script src="data/imbb_judges.js"></script>
   <script src="data/judges.js"></script>
   <script src="data/tallymasters.js"></script>
   <script src="data/team.js"></script>
@@ -63,6 +64,20 @@
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 11px;
       letter-spacing: 2px; text-transform: uppercase; transition: color .2s; }
     .nav-links a:hover { color: var(--white); }
+
+    /* ── Photo status bar (screen only) ── */
+    #photo-status-bar {
+      position: fixed; top: 56px; left: 0; right: 0; z-index: 999;
+      display: none; align-items: center; justify-content: center; gap: 8px;
+      padding: 7px 20px; font-size: 11px; letter-spacing: .5px;
+      font-family: var(--font);
+    }
+    #photo-status-bar.pbar-loading { display:flex; background:rgba(22,56,117,.97); color:#aec8ff; }
+    #photo-status-bar.pbar-warn    { display:flex; background:rgba(130,70,0,.97);  color:#ffd580; }
+    #photo-status-bar.pbar-ready   { display:flex; background:rgba(14,75,45,.97);  color:#8fffc0; }
+    #photo-status-bar a { color:inherit; opacity:.8; margin-left:4px; }
+    #photo-status-bar progress { height:6px; width:120px; accent-color:currentColor; }
+    @media print { #photo-status-bar { display:none !important; } }
 
     /* ── COVER LOGOS ── */
     .cover-logos {
@@ -182,16 +197,32 @@
     .c-name { font-size:clamp(28px,3.5vw,52px); font-weight:700;
       line-height:1.0; letter-spacing:-1px; }
     .c-flag { font-size:clamp(24px,3vw,44px); flex-shrink:0; line-height:1; }
+    /* ── Contest badges: reusable across IML and IMBB content ── */
+    .contest-badge {
+      display: inline-block; font-size: 8px; font-weight: 700;
+      letter-spacing: 2.5px; text-transform: uppercase;
+      padding: 2px 8px; margin-bottom: 5px;
+      border-radius: 2px; border: 1px solid;
+    }
+    .contest-iml  { background: rgba(27,79,168,.25); color: #7baaf5; border-color: rgba(27,79,168,.55); }
+    .contest-imbb { background: rgba(180,120,10,.25); color: #e0a840; border-color: rgba(180,120,10,.55); }
+
+    /* ── Photo grid cell contest colouring ── */
+    .cell-iml  { border-top: 3px solid #5b8fe8; }
+    .cell-imbb { border-top: 3px solid #e0a840; }
+
     .c-title-tag { font-size:11px; letter-spacing:3px; text-transform:uppercase;
       color:var(--blue-light); margin-bottom:18px; }
     .c-bio { font-size:clamp(14px,1.4vw,17px); line-height:1.78;
       color:var(--off-white); }
 
-    /* ── JUDGES (Section 3) — uses contestant page-block layout ── */
+    /* ── IMBB JUDGES + IML JUDGES (Section 3) — contestant page-block layout ── */
+    #imbb-judges { padding:0; border-top:1px solid var(--border); }
+    #imbb-judges > .s-header { padding-bottom:0; }
+    #imbb-judges .page-block-header { color: var(--gold, #e0a840); }
+
     #judges { padding:0; border-top:1px solid var(--border); }
-    /* screen: no extra bottom padding on s-header — page-blocks follow directly */
     #judges > .s-header { padding-bottom:0; }
-    /* screen: running header on subsequent judge pages */
     #judges .page-block-header { color:var(--blue-light); }
 
     /* ── TALLYMASTERS ── */
@@ -335,8 +366,9 @@
     .exp-label { font-size:13px; font-weight:700; letter-spacing:.5px;
       line-height:1.3; margin-bottom:6px; }
     .exp-meta { font-size:11px; color:var(--muted); letter-spacing:.5px; }
+    .exp-card-footer { display:flex; flex-wrap:wrap; align-items:center; gap:4px; margin-top:8px; }
     .exp-badge { display:inline-block; font-size:9px; letter-spacing:2px;
-      text-transform:uppercase; padding:2px 8px; margin-top:8px; }
+      text-transform:uppercase; padding:2px 8px; }
     .exp-badge.mandatory { background:rgba(27,79,168,.35); color:var(--blue-light); }
     .exp-badge.optional  { background:rgba(255,255,255,.08); color:var(--muted); }
 
@@ -355,8 +387,13 @@
     .event-header-body { flex:1; }
     .event-title { font-size:clamp(20px,2.5vw,32px); font-weight:700; margin-bottom:4px; }
     .event-sub { font-size:12px; letter-spacing:3px; text-transform:uppercase;
-      color:var(--muted); }
-    .badge-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+      color:var(--muted); margin-bottom:6px; }
+    .event-time-row { display:flex; flex-wrap:wrap; gap:6px 20px; margin-bottom:8px; }
+    .event-time-item { display:flex; align-items:baseline; gap:6px;
+      font-size:12px; color:rgba(255,255,255,0.85); }
+    .event-time-label { font-size:9px; letter-spacing:2px; text-transform:uppercase;
+      color:var(--blue-light); font-weight:700; }
+    .badge-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:0; }
     .badge { font-size:9px; letter-spacing:2px; text-transform:uppercase;
       padding:3px 10px; display:inline-block; }
     .badge.mandatory { background:rgba(27,79,168,.4); color:var(--blue-light); }
@@ -753,13 +790,42 @@
       }
       .c-name      { font-size: 20pt !important; line-height: 1.0 !important; letter-spacing: -0.5pt !important; }
       .c-flag      { font-size: 18pt !important; }
+      .contest-badge { font-size: 6pt !important; letter-spacing: 2pt !important; padding: 1.5pt 6pt !important; margin-bottom: 4pt !important; display: inline-block !important; }
+      .contest-iml  { background: rgba(27,79,168,.3) !important; color: #7baaf5 !important; }
+      .contest-imbb { background: rgba(180,120,10,.3) !important; color: #e0a840 !important; }
       .c-title-tag { font-size: 6.5pt !important; letter-spacing: 2pt !important; margin-bottom: 6pt !important; }
       .c-bio       { font-size: 12pt !important; line-height: 1.6 !important; }
       .c-text      { padding-top: 2pt !important; }
       .c-name-row  { margin-bottom: 6pt !important; }
 
       /* ══════════════════════════════
-         JUDGES — section title + 3-per-page contestant layout
+         IMBB JUDGES — section title + 3-per-page layout
+         s-header (0.52in) + margin (0.12in) + first page-block (10.36in) = 11in
+      ══════════════════════════════ */
+      #imbb-judges {
+        padding: 0 !important;
+        page-break-before: always !important;
+        break-before: page !important;
+      }
+      #imbb-judges > .s-header {
+        height: 0.52in !important;
+        padding: 0 !important;
+        margin-bottom: 0.12in !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+      }
+      #imbb-judges .page-block:first-child {
+        page-break-before: avoid !important;
+        break-before: avoid !important;
+        height: 10.36in !important;
+        min-height: 10.36in !important;
+      }
+
+      /* ══════════════════════════════
+         IML JUDGES — section title + 3-per-page layout
          s-header (0.52in) + margin (0.12in) + first page-block (10.36in) = 11in
       ══════════════════════════════ */
       #judges {
@@ -767,7 +833,6 @@
         page-break-before: always !important;
         break-before: page !important;
       }
-      /* Section title — compact, centred, matches team-grid treatment */
       #judges > .s-header {
         height: 0.52in !important;
         padding: 0 !important;
@@ -778,7 +843,6 @@
         justify-content: center !important;
         text-align: center !important;
       }
-      /* First page-block: shares the opening page with the s-header above */
       #judges .page-block:first-child {
         page-break-before: avoid !important;
         break-before: avoid !important;
@@ -867,7 +931,8 @@
       .exp-num   { font-size: 20pt !important; margin-bottom: 3pt !important; }
       .exp-label { font-size: 12pt !important; margin-bottom: 4pt !important; }
       .exp-meta  { font-size: 10pt !important; }
-      .exp-badge { font-size: 5.5pt !important; padding: 1pt 5pt !important; margin-top: 5pt !important; }
+      .exp-card-footer { display: flex !important; flex-wrap: wrap !important; align-items: center !important; gap: 3pt !important; margin-top: 5pt !important; }
+      .exp-badge { font-size: 5.5pt !important; padding: 1pt 5pt !important; }
 
       /* ══════════════════════════════
          EVENTS  — each event = one page
@@ -921,7 +986,10 @@
         flex-shrink: 0 !important;
       }
       .event-title { font-size: 26pt !important; margin-bottom: 4pt !important; }
-      .event-sub   { font-size: 12pt !important; letter-spacing: 2pt !important; }
+      .event-sub   { font-size: 12pt !important; letter-spacing: 2pt !important; margin-bottom: 5pt !important; }
+      .event-time-row { display: flex !important; flex-wrap: wrap !important; gap: 4pt 18pt !important; margin-bottom: 7pt !important; }
+      .event-time-item { display: flex !important; align-items: baseline !important; gap: 5pt !important; font-size: 12pt !important; }
+      .event-time-label { font-size: 7pt !important; letter-spacing: 1.5pt !important; color: #5b8fe8 !important; font-weight: 700 !important; }
       .badge       { font-size: 7pt !important; padding: 2.5pt 9pt !important; letter-spacing: 1.5pt !important; }
       .badge-row   { margin-top: 7pt !important; gap: 6pt !important; }
 
@@ -1513,14 +1581,15 @@
     <li><a href="#venue">Venue</a></li>
     <li><a href="#class-grid" id="nav-class-label">Class</a></li>
     <li><a href="#contestants">Contestants</a></li>
-    <li><a href="#judges">Judges</a></li>
+    <li><a href="#imbb-judges">IMBB Judges</a></li>
+    <li><a href="#judges">IML Judges</a></li>
     <li><a href="#tallymasters">Tallymasters</a></li>
     <li><a href="#team-grid">Team</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#events">Events</a></li>
     <li><a href="#code-of-conduct">Conduct</a></li>
   </ul>
-  <button onclick="window.print()" style="
+  <button id="print-btn" onclick="printWhenReady(this)" style="
     background:var(--blue); border:none; color:var(--white); cursor:pointer;
     font-size:10px; letter-spacing:2px; text-transform:uppercase;
     padding:0 16px; height:32px; margin-left:16px;
@@ -1529,6 +1598,7 @@
     &#x1F5A8;&nbsp; Export PDF
   </button>
 </nav>
+<div id="photo-status-bar"></div>
 
 <!-- ── COVER ── -->
 <section id="cover">
@@ -1683,9 +1753,16 @@
       </a>
     </li>
     <li>
+      <a href="#imbb-judges">
+        <span class="toc-num">3</span>
+        <span class="toc-item-title">Your IMBB Judges</span>
+        <span class="toc-arrow">&#x2192;</span>
+      </a>
+    </li>
+    <li>
       <a href="#judges">
         <span class="toc-num">3</span>
-        <span class="toc-item-title">Your IMLBB Judges</span>
+        <span class="toc-item-title">Your IML Judges</span>
         <span class="toc-arrow">&#x2192;</span>
       </a>
     </li>
@@ -1769,10 +1846,20 @@
 </section>
 
 <!-- ── JUDGES (pages 31–33, sourced from internationalmrleather.com/judges) ── -->
+<!-- ── IMBB JUDGES ── -->
+<section id="imbb-judges">
+  <div class="s-header">
+    <span class="s-num">Section 3</span>
+    <h2 class="s-title">Your IMBB Judges</h2>
+  </div>
+  <div id="imbb-judges-container"><!-- rendered by renderImbbJudges() from data/imbb_judges.js --></div>
+</section>
+
+<!-- ── IML JUDGES ── -->
 <section id="judges">
   <div class="s-header">
     <span class="s-num">Section 3</span>
-    <h2 class="s-title">Your IMLBB Judges</h2>
+    <h2 class="s-title">Your IML Judges</h2>
   </div>
   <div id="judges-container"><!-- rendered by renderJudges() from data/judges.js --></div>
 </section>
@@ -2281,6 +2368,76 @@ if (document.readyState === 'loading') {
   applyConfig();
 }
 
+/* ══ Photo loading tracker ══════════════════════════════════════════════════
+   Tracks every photo <img> the page creates and updates the status bar.
+   Usage:
+     _photoTracker.register()          – call before setting img.src
+     _photoTracker.done(true,  name)   – call on img 'load' event
+     _photoTracker.done(false, name)   – call when all fallbacks exhausted
+   The status bar stays hidden until the first photo is registered.
+═══════════════════════════════════════════════════════════════════════════ */
+const _photoTracker = (() => {
+  let total = 0, settled = 0, failed = 0;
+
+  function update() {
+    const bar = document.getElementById('photo-status-bar');
+    const btn = document.getElementById('print-btn');
+    if (!bar) return;
+    if (total === 0) return;
+
+    if (settled < total) {
+      bar.className = 'pbar-loading';
+      bar.innerHTML =
+        `<progress value="${settled}" max="${total}"></progress>` +
+        `<span>Loading photos&hellip; ${settled} / ${total}</span>`;
+      if (btn) { btn.textContent = '\u23F3 Loading\u2026'; btn.disabled = true; }
+    } else if (failed > 0) {
+      bar.className = 'pbar-warn';
+      bar.innerHTML =
+        `<span>&#x26A0;&#xFE0F; ${failed} photo${failed > 1 ? 's' : ''} could not load &mdash; ` +
+        `ensure each Google Drive file is shared &ldquo;Anyone with the link&rdquo;. ` +
+        `<a href="https://support.google.com/drive/answer/2494822" target="_blank">How to fix &rarr;</a></span>`;
+      if (btn) { btn.innerHTML = '&#x1F5A8;&nbsp; Export PDF'; btn.disabled = false; }
+      /* auto-hide after 20s so it doesn't obscure print layout */
+      setTimeout(() => { if (bar.classList.contains('pbar-warn')) bar.style.opacity = '0'; }, 20000);
+    } else {
+      bar.className = 'pbar-ready';
+      bar.innerHTML = `<span>&#x2713; All ${total} photos loaded &mdash; ready to export PDF</span>`;
+      if (btn) { btn.innerHTML = '&#x1F5A8;&nbsp; Export PDF'; btn.disabled = false; }
+      setTimeout(() => { bar.className = ''; bar.style.display = 'none'; }, 4000);
+    }
+  }
+
+  return {
+    register() { total++; update(); },
+    done(ok, name) {
+      settled++;
+      if (!ok) {
+        failed++;
+        console.warn(
+          `[Photo] Could not load photo for "${name}". ` +
+          `Check that the Google Drive file is shared as "Anyone with the link can view".`
+        );
+      }
+      update();
+    },
+    isReady() { return total > 0 && settled >= total; },
+  };
+})();
+
+/* ── Smart print: waits up to 90s for all photos to settle ── */
+async function printWhenReady(btn) {
+  if (_photoTracker.isReady()) { window.print(); return; }
+  const orig = btn ? btn.innerHTML : '';
+  if (btn) { btn.innerHTML = '&#x23F3; Loading photos&hellip;'; btn.disabled = true; }
+  const deadline = Date.now() + 90_000;
+  while (!_photoTracker.isReady() && Date.now() < deadline) {
+    await new Promise(r => setTimeout(r, 400));
+  }
+  if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+  window.print();
+}
+
 /* ── Drive helpers ── */
 function extractDriveId(input) {
   if (!input) return null;
@@ -2363,8 +2520,9 @@ async function init() {
   const contestants = buildContestants(EMBEDDED);
   renderGrid(contestants);
   renderProfiles(contestants);
-  renderJudges();        /* judges immediately follow contestant pages */
-  renderTallymasters();  /* tallymasters follow judges */
+  renderImbbJudges();    /* IMBB judges immediately follow contestant pages */
+  renderJudges();        /* IML judges follow IMBB judges */
+  renderTallymasters();  /* tallymasters follow IML judges */
 
   /* Then attempt a live refresh in the background */
   try {
@@ -2385,11 +2543,13 @@ async function init() {
         photoFallback: driveThumb((r[5] || '').trim()),
         country:       (r[23] || '').trim(),
         flag:          getFlag((r[23] || '').trim()),
+        contest:       (r[24] || '').trim(),   /* col Y — "IML" or "IMBB" */
       }))
       .filter(c => c.name);
     if (live.length !== contestants.length) {
       renderGrid(live);
       renderProfiles(live);
+      renderImbbJudges();
       renderJudges();
       renderTallymasters();
     }
@@ -2403,25 +2563,30 @@ function renderGrid(list) {
 
   list.forEach((c, idx) => {
     const cell = document.createElement('div');
-    cell.className = 'grid-cell';
+    const contestKey = (c.contest || '').trim().toUpperCase();
+    cell.className = 'grid-cell' + (contestKey === 'IMBB' ? ' cell-imbb' : contestKey === 'IML' ? ' cell-iml' : '');
     cell.title = c.name;
 
     if (c.photoUrl) {
       const img = document.createElement('img');
       img.alt = c.name;
       img.loading = 'eager';
-      img.src = c.photoUrl;
-      /* Try fallback then placeholder on error */
-      let triedFallback = false;
+      _photoTracker.register();
+      let triedFallback = false, photoSettled = false;
+      img.addEventListener('load', () => {
+        if (!photoSettled && img.isConnected) { photoSettled = true; _photoTracker.done(true, c.name); }
+      });
       img.addEventListener('error', () => {
         if (!triedFallback && c.photoFallback) {
           triedFallback = true;
           img.src = c.photoFallback;
         } else {
+          if (!photoSettled && img.isConnected) { photoSettled = true; _photoTracker.done(false, c.name); }
           img.replaceWith(Object.assign(document.createElement('div'),
             { className: 'grid-placeholder', textContent: '🏅' }));
         }
       });
+      img.src = c.photoUrl;
       cell.appendChild(img);
     } else {
       cell.innerHTML = `<div class="grid-placeholder">🏅</div>`;
@@ -2477,10 +2642,13 @@ function renderProfiles(list) {
         const img = document.createElement('img');
         img.alt = c.name;
         img.loading = 'eager';
-        img.src = c.photoUrl;
         placeholder.classList.add('hidden'); // hide until needed
-
-        let triedFallback = false;
+        _photoTracker.register();
+        let triedFallback = false, photoSettled = false;
+        img.addEventListener('load', () => {
+          placeholder.classList.add('hidden');
+          if (!photoSettled && img.isConnected) { photoSettled = true; _photoTracker.done(true, c.name); }
+        });
         img.addEventListener('error', () => {
           if (!triedFallback && c.photoFallback) {
             triedFallback = true;
@@ -2488,11 +2656,10 @@ function renderProfiles(list) {
           } else {
             img.style.display = 'none';
             placeholder.classList.remove('hidden');
+            if (!photoSettled && img.isConnected) { photoSettled = true; _photoTracker.done(false, c.name); }
           }
         });
-        img.addEventListener('load', () => {
-          placeholder.classList.add('hidden');
-        });
+        img.src = c.photoUrl;
         photoWrap.appendChild(img);
         photoWrap.appendChild(placeholder);
       } else {
@@ -2520,6 +2687,15 @@ function renderProfiles(list) {
 
       text.appendChild(nameRow);
 
+      /* Contest badge — "IML" or "IMBB" — only shown when data is available */
+      if (c.contest) {
+        const contestKey = c.contest.trim().toUpperCase();
+        const badge = document.createElement('span');
+        badge.className = 'contest-badge ' + (contestKey === 'IMBB' ? 'contest-imbb' : 'contest-iml');
+        badge.textContent = contestKey;
+        text.appendChild(badge);
+      }
+
       if (c.title) {
         const titleTag = document.createElement('p');
         titleTag.className = 'c-title-tag';
@@ -2545,8 +2721,124 @@ function renderProfiles(list) {
 }
 
 /* ══════════════════════════════════════════════════════════════
+   renderImbbJudges()
+   Reads IMBB_JUDGES from data/imbb_judges.js and builds IMBB judge profile
+   pages using the same page-block / contestant-entry layout as contestants.
+   3 judges per page.  To add/edit IMBB judges, edit data/imbb_judges.js only.
+══════════════════════════════════════════════════════════════ */
+function renderImbbJudges() {
+  const container = document.getElementById('imbb-judges-container');
+  if (!container || typeof IMBB_JUDGES === 'undefined' || !IMBB_JUDGES.length) return;
+  container.innerHTML = '';
+
+  chunk(IMBB_JUDGES, 3).forEach((trio, pi) => {
+    const block = document.createElement('div');
+    block.className = 'page-block';
+
+    if (pi > 0) {
+      const header = document.createElement('div');
+      header.className = 'page-block-header';
+      header.textContent = 'SECTION 3  \u00b7  YOUR IMBB JUDGES';
+      block.appendChild(header);
+    }
+
+    const trioWrap = document.createElement('div');
+    trioWrap.className = 'contestant-trio';
+
+    trio.forEach(j => {
+      const entry = document.createElement('div');
+      entry.className = 'contestant-entry';
+
+      /* ── Photo ── */
+      const photoWrap = document.createElement('div');
+      photoWrap.className = 'c-photo-wrap';
+
+      if (j.photo) {
+        const img = document.createElement('img');
+        img.src = j.photo;
+        img.alt = j.name;
+        img.loading = 'eager';
+        const ph = document.createElement('div');
+        ph.className = 'c-photo-placeholder hidden';
+        ph.textContent = '\u2696\uFE0F';
+        img.addEventListener('error', () => {
+          img.style.display = 'none';
+          ph.classList.remove('hidden');
+        });
+        photoWrap.appendChild(img);
+        photoWrap.appendChild(ph);
+      } else {
+        const ph = document.createElement('div');
+        ph.className = 'c-photo-placeholder';
+        ph.textContent = '\u2696\uFE0F';
+        photoWrap.appendChild(ph);
+      }
+
+      /* ── Text ── */
+      const text = document.createElement('div');
+      text.className = 'c-text';
+
+      const nameRow = document.createElement('div');
+      nameRow.className = 'c-name-row';
+
+      const nameEl = document.createElement('h2');
+      nameEl.className = 'c-name';
+      nameEl.textContent = j.name;
+      nameRow.appendChild(nameEl);
+
+      if (j.flag) {
+        const flagEl = document.createElement('span');
+        flagEl.className = 'c-flag';
+        flagEl.textContent = '\u00a0' + j.flag;
+        nameRow.appendChild(flagEl);
+      }
+      text.appendChild(nameRow);
+
+      /* IMBB contest badge */
+      const badge = document.createElement('span');
+      badge.className = 'contest-badge contest-imbb';
+      badge.textContent = 'IMBB';
+      text.appendChild(badge);
+
+      /* Title tag: role · location */
+      const tagLine = [j.title, j.location].filter(Boolean).join(' \u00b7 ');
+      if (tagLine) {
+        const tag = document.createElement('p');
+        tag.className = 'c-title-tag';
+        tag.textContent = tagLine;
+        text.appendChild(tag);
+      }
+
+      if (j.bio) {
+        const bioEl = document.createElement('p');
+        bioEl.className = 'c-bio';
+        bioEl.textContent = j.bio;
+        text.appendChild(bioEl);
+      }
+
+      if (j.url) {
+        const link = document.createElement('a');
+        link.className = 'judge-link';
+        link.href = j.url;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = 'Full profile \u2192';
+        text.appendChild(link);
+      }
+
+      entry.appendChild(photoWrap);
+      entry.appendChild(text);
+      trioWrap.appendChild(entry);
+    });
+
+    block.appendChild(trioWrap);
+    container.appendChild(block);
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
    renderJudges()
-   Reads JUDGES from data/judges.js and builds judge profile pages
+   Reads JUDGES from data/judges.js and builds IML judge profile pages
    using the same page-block / contestant-entry layout as contestants.
    3 judges per page.  To add/edit judges, edit data/judges.js only.
 ══════════════════════════════════════════════════════════════ */
@@ -2564,7 +2856,7 @@ function renderJudges() {
     if (pi > 0) {
       const header = document.createElement('div');
       header.className = 'page-block-header';
-      header.textContent = `SECTION 3  \u00b7  YOUR IMLBB JUDGES`;
+      header.textContent = 'SECTION 3  \u00b7  YOUR IML JUDGES';
       block.appendChild(header);
     }
 
@@ -2811,22 +3103,59 @@ function renderEventSection(sec) {
   }
 }
 
+/* ── computeCallTime ─────────────────────────────────────────────────────
+   Given a time string like "7:00 PM – 10:00 PM" or "11:30 AM – 3:00 PM",
+   extracts the start time, subtracts 30 minutes, and returns the formatted
+   result (e.g. "6:30 PM").  Returns null for non-clock strings ("Main Stage").
+──────────────────────────────────────────────────────────────────────── */
+function computeCallTime(timeStr) {
+  const m = (timeStr || '').match(/^(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+  if (!m) return null;
+  let h   = parseInt(m[1], 10);
+  let min = parseInt(m[2], 10);
+  const period = m[3].toUpperCase();
+  if (period === 'PM' && h !== 12) h += 12;
+  if (period === 'AM' && h === 12) h = 0;
+  let total = h * 60 + min - 30;
+  if (total < 0) total += 24 * 60;
+  const nh = Math.floor(total / 60) % 24;
+  const nm = total % 60;
+  const np = nh < 12 ? 'AM' : 'PM';
+  const dh = nh === 0 ? 12 : nh > 12 ? nh - 12 : nh;
+  return `${dh}:${String(nm).padStart(2, '0')} ${np}`;
+}
+
 function renderEventBlocks() {
   const container = document.getElementById('events-container');
   if (!container || typeof EVENTS === 'undefined') return;
 
   container.innerHTML = EVENTS.map(ev => {
-    const badgeClass = ev.badge === 'MANDATORY' ? 'mandatory' : 'optional';
-    const badgeLabel = ev.badge === 'MANDATORY' ? 'Mandatory' : 'Optional';
-    const leftHtml  = (ev.leftCol  || []).map(renderEventSection).join('\n');
-    const rightHtml = (ev.rightCol || []).map(renderEventSection).join('\n');
+    const badgeClass  = ev.badge === 'MANDATORY' ? 'mandatory' : 'optional';
+    const badgeLabel  = ev.badge === 'MANDATORY' ? 'Mandatory' : 'Optional';
+    const leftHtml    = (ev.leftCol  || []).map(renderEventSection).join('\n');
+    const rightHtml   = (ev.rightCol || []).map(renderEventSection).join('\n');
+    const contestHtml = buildContestBadgeHtml(ev.contest);
+
+    const _ctRaw = (ev.callTime || '').trim();
+    const callTime = _ctRaw === 'NONE' ? null : (_ctRaw || computeCallTime(ev.time));
+    const timeMeta = ev.time
+      ? callTime
+        ? `<span class="event-time-item"><span class="event-time-label">Call Time</span>${esc(callTime)}</span>`
+          + `<span class="event-time-item"><span class="event-time-label">Event Time</span>${esc(ev.time)}</span>`
+        : `<span class="event-time-item"><span class="event-time-label">Event Time</span>${esc(ev.time)}</span>`
+      : '';
+
     return `<div class="event-block" id="${esc(ev.id)}">
       <div class="event-header">
         <div class="event-num-badge">${esc(ev.number)}</div>
         <div class="event-header-body">
           <h3 class="event-title">${esc(ev.title)}</h3>
-          <p class="event-sub">${esc(ev.day)}${ev.time ? ' &middot; ' + esc(ev.time) : ''}</p>
-          <div class="badge-row"><span class="badge ${badgeClass}">${badgeLabel}</span></div>
+          <p class="event-sub">${esc(ev.day)}</p>
+          ${timeMeta ? `<div class="event-time-row">${timeMeta}</div>` : ''}
+          <div class="badge-row">
+            <span class="badge ${badgeClass}">${badgeLabel}</span>
+            ${contestHtml}
+          </div>
         </div>
       </div>
       <div class="event-body">
@@ -2848,6 +3177,22 @@ function renderEventBlocks() {
    Reads EVENTS from data/events.js and builds the experience
    overview card grid (Section 6).  Edit data/events.js only.
 ══════════════════════════════════════════════════════════════ */
+/* ── buildContestBadgeHtml ───────────────────────────────────────────────
+   Returns one or two .contest-badge spans for an event's contest value.
+   contest = 'IML'  → single IML badge
+   contest = 'IMBB' → single IMBB badge
+   contest = 'BOTH' → IML + IMBB badges side by side
+   Anything else    → empty string
+──────────────────────────────────────────────────────────────────────── */
+function buildContestBadgeHtml(contest) {
+  const c = (contest || '').trim().toUpperCase();
+  if (c === 'IML')  return '<span class="contest-badge contest-iml">IML</span>';
+  if (c === 'IMBB') return '<span class="contest-badge contest-imbb">IMBB</span>';
+  if (c === 'BOTH') return '<span class="contest-badge contest-iml">IML</span>'
+                         + '<span class="contest-badge contest-imbb">IMBB</span>';
+  return '';
+}
+
 function renderExpGrid() {
   const grid = document.getElementById('exp-grid-container');
   if (!grid || typeof EVENTS === 'undefined') return;
@@ -2855,11 +3200,15 @@ function renderExpGrid() {
   grid.innerHTML = EVENTS.map(ev => {
     const badgeClass = ev.badge === 'MANDATORY' ? 'mandatory' : 'optional';
     const badgeLabel = ev.badge === 'MANDATORY' ? 'Mandatory' : 'Optional';
+    const contestHtml = buildContestBadgeHtml(ev.contest);
     return `<a class="exp-card" href="#${esc(ev.id)}">
       <div class="exp-num">${esc(ev.number)}</div>
       <div class="exp-label">${esc(ev.title)}</div>
       <div class="exp-meta">${esc(ev.cardMeta || ev.day)}</div>
-      <span class="exp-badge ${badgeClass}">${badgeLabel}</span>
+      <div class="exp-card-footer">
+        <span class="exp-badge ${badgeClass}">${badgeLabel}</span>
+        ${contestHtml}
+      </div>
     </a>`;
   }).join('');
 }
@@ -2963,7 +3312,9 @@ function buildPhotoImg(photoUrl, photoFallback, altText, rotateDeg, placeholderC
   const img = document.createElement('img');
   img.alt = altText;
   img.loading = 'eager';
-  img.src = photoUrl;
+
+  _photoTracker.register();
+  let triedFallback = false, photoSettled = false;
 
   if (rotateDeg && rotateDeg % 360 !== 0) {
     /* For 90/270° rotations the image's natural width becomes its rendered height.
@@ -2982,6 +3333,7 @@ function buildPhotoImg(photoUrl, photoFallback, altText, rotateDeg, placeholderC
 
     /* After load, set actual swap dimensions based on rendered cell size */
     img.addEventListener('load', () => {
+      if (!photoSettled && wrap.isConnected) { photoSettled = true; _photoTracker.done(true, altText); }
       const w = wrap.offsetWidth  || 150;
       const h = wrap.offsetHeight || 200;
       if (is90or270) {
@@ -2994,18 +3346,22 @@ function buildPhotoImg(photoUrl, photoFallback, altText, rotateDeg, placeholderC
     });
   } else {
     img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top center;display:block;';
+    img.addEventListener('load', () => {
+      if (!photoSettled && wrap.isConnected) { photoSettled = true; _photoTracker.done(true, altText); }
+    });
   }
 
-  let triedFallback = false;
   img.addEventListener('error', () => {
     if (!triedFallback && photoFallback) {
       triedFallback = true;
       img.src = photoFallback;
     } else {
+      if (!photoSettled && wrap.isConnected) { photoSettled = true; _photoTracker.done(false, altText); }
       wrap.innerHTML = `<div class="grid-placeholder">${placeholderChar}</div>`;
     }
   });
 
+  img.src = photoUrl;
   wrap.appendChild(img);
   return wrap;
 }

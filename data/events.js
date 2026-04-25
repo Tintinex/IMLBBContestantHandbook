@@ -29,8 +29,18 @@
  *              (e.g. "Friday · Main Stage")
  *  day         Day / period shown in the detail page header
  *  time        Time range shown in the detail page header
+ *              (e.g. "7:00 PM – 10:00 PM")
+ *  callTime    Override the auto-computed call time shown in the detail header.
+ *              Leave as '' to auto-compute (always 30 min before `time` start).
+ *              Set to any string to display it verbatim, e.g. 'See your handler'
+ *              or '10:00 AM'. Set to 'NONE' to suppress the call-time row entirely.
  *  venue       Venue / room shown in the detail page header
  *  badge       "OPTIONAL" or "MANDATORY"
+ *  contest     Which contest this event applies to:
+ *                "IML"  — International Mr. Leather contestants only
+ *                "IMBB" — International Mr. Bootblack contestants only
+ *                "BOTH" — all contestants (shown as IML + IMBB tags)
+ *              Change this field each year if the programme changes.
  *
  *  COLUMN CONTENT
  *  ─────────────────────────────────────────────────────────────
@@ -80,12 +90,14 @@ const EVENTS = [
   {
     id: 'event-1',
     number: '01',
-    title: 'Registration',
+    title: 'Contestant Registration',
     cardMeta: 'Wednesday · Florentine Room',
     day: 'Wednesday',
     time: '7:00 PM \u2013 10:00 PM',
+    callTime: 'NONE',
     venue: 'Congress Plaza Hotel \u2014 Florentine Room',
     badge: 'OPTIONAL',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -139,9 +151,11 @@ const EVENTS = [
     title: 'Contestant Orientation',
     cardMeta: 'Thursday · Florentine Room',
     day: 'Thursday',
-    time: '11:30 AM \u2013 3:00 PM',
+    time: '12:00 PM \u2013 3:00 PM',
+    callTime: '',
     venue: 'Congress Plaza Hotel \u2014 Florentine Room',
     badge: 'MANDATORY',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -174,7 +188,7 @@ const EVENTS = [
       },
       {
         type: 'tip',
-        text: 'Learn your handler\u2019s name and cell number immediately. They are your lifeline for the entire weekend.',
+        text: 'Learn your handler\u2019s name and their number immediately. They are your lifeline for the entire weekend.',
       },
     ],
   },
@@ -183,17 +197,19 @@ const EVENTS = [
   {
     id: 'event-3',
     number: '03',
-    title: 'Welcome Cocktail Reception',
+    title: 'Opening Ceremonies',
     cardMeta: 'Thursday Evening · Congress Plaza Hotel',
     day: 'Thursday Evening',
     time: 'Congress Plaza Hotel',
+    callTime: '',
     venue: 'Congress Plaza Hotel',
     badge: 'MANDATORY',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
         q: 'What happens here?',
-        a: 'An evening mixer where you meet your fellow contestants, judges, tallymasters, and the wider IMLBB community. Informal \u2014 conversation, drinks, and community. Dress in leather or uniform.',
+        a: 'The Opening Ceremony is the first public event of IMLBB. The purpose of this event is to introduce the judges and the contestants to the public. During the Opening Ceremonies you will be lined up alphabetically by country or US state, you will be introduced and then you will select your contestant number for IMBB and IML.',
       },
       {
         type: 'checklist',
@@ -239,17 +255,19 @@ const EVENTS = [
   {
     id: 'event-4',
     number: '04',
-    title: 'Contestant Judging \u2014 Leather',
-    cardMeta: 'Friday · Main Stage',
-    day: 'Friday',
+    title: 'Contestant Interviews',
+    cardMeta: 'Friday and Saturday',
+    day: 'Friday and Saturday',
     time: 'Main Stage',
-    venue: 'Main Stage, Congress Plaza Hotel',
+    callTime: '',
+    venue: 'Congress Plaza Hotel - Judges Room',
     badge: 'MANDATORY',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
         q: 'What happens here?',
-        a: 'All contestants parade across the main stage in their leather gear. Judges score on presentation, confidence, leather craft, and how you carry yourself. This is the iconic IMLBB moment \u2014 the stage is yours.',
+        a: 'The first stage of judging. Each contestant has a 8-minute private interview with a panel of judges. You will be asked about your leather background, your community involvement, and your vision for the IMLBB title. This is your chance to show the judges who you are beyond the stage.',
       },
       {
         type: 'checklist',
@@ -302,8 +320,10 @@ const EVENTS = [
     cardMeta: 'Friday · Exhibition Hall',
     day: 'Friday',
     time: 'Exhibition Hall',
+    callTime: '',
     venue: 'Exhibition Hall',
     badge: 'OPTIONAL',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -338,8 +358,10 @@ const EVENTS = [
     cardMeta: 'Friday\u2013Saturday · Private Rooms',
     day: 'Friday\u2013Saturday',
     time: 'Private Interview Rooms',
+    callTime: '',
     venue: 'Private Interview Rooms',
     badge: 'MANDATORY',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -398,8 +420,10 @@ const EVENTS = [
     cardMeta: 'Saturday Morning',
     day: 'Saturday Morning',
     time: 'Various',
+    callTime: '',
     venue: 'Various',
     badge: 'OPTIONAL',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -430,8 +454,10 @@ const EVENTS = [
     cardMeta: 'Saturday · Main Stage',
     day: 'Saturday',
     time: 'Main Stage',
+    callTime: '',
     venue: 'Main Stage, Congress Plaza Hotel',
     badge: 'MANDATORY',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -477,8 +503,10 @@ const EVENTS = [
     cardMeta: 'Saturday Morning',
     day: 'Saturday Morning',
     time: 'Congress Plaza Hotel',
+    callTime: '',
     venue: 'Congress Plaza Hotel',
     badge: 'OPTIONAL',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -509,8 +537,10 @@ const EVENTS = [
     cardMeta: 'Thursday\u2013Saturday \u00b7 Various',
     day: 'Thursday\u2013Saturday Evening',
     time: 'Various',
+    callTime: '',
     venue: 'Various Locations',
     badge: 'OPTIONAL',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -539,8 +569,10 @@ const EVENTS = [
     cardMeta: 'Saturday Evening',
     day: 'Saturday Evening',
     time: 'Congress Plaza Hotel, Grand Ballroom',
+    callTime: '',
     venue: 'Congress Plaza Hotel \u2014 Grand Ballroom',
     badge: 'MANDATORY',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -575,8 +607,10 @@ const EVENTS = [
     cardMeta: 'Sunday · Main Stage',
     day: 'Sunday',
     time: 'Main Stage',
+    callTime: '',
     venue: 'Main Stage, Congress Plaza Hotel',
     badge: 'MANDATORY',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
@@ -634,8 +668,10 @@ const EVENTS = [
     cardMeta: 'Sunday Night',
     day: 'Sunday Night',
     time: 'Various',
+    callTime: '',
     venue: 'Various Venues',
     badge: 'OPTIONAL',
+    contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
