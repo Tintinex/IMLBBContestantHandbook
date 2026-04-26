@@ -3396,6 +3396,7 @@ function renderEventBlocks() {
         <div class="event-header-body">
           <h3 class="event-title">${esc(ev.title)}</h3>
           <p class="event-sub">${esc(ev.day)}</p>
+          ${ev.venue ? `<div class="event-time-row"><span class="event-time-item"><span class="event-time-label">Venue</span>${esc(ev.venue)}</span></div>` : ''}
           ${timeMeta ? `<div class="event-time-row">${timeMeta}</div>` : ''}
           <div class="badge-row">
             <span class="badge ${badgeClass}">${badgeLabel}</span>

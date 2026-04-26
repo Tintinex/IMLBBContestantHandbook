@@ -80,8 +80,8 @@
  *  4. Update the REQUIRED count below if the total is no longer 13.
  *  5. Run: python validate.py   — to confirm everything passes.
  *
- *  NOTE: The build system enforces exactly 13 events. If you add or
- *  remove events, update the count check in build.py (line ~144).
+ *  NOTE: The build system only checks that at least one event exists.
+ *  You may add or remove events freely — no count needs updating in build.py.
  */
 
 const EVENTS = [
@@ -163,6 +163,11 @@ const EVENTS = [
         a: 'This is the first time all contestants will officially gather along with the handlers, judges and the rest of the IML team. It is an incredibly important and powerful experience that will set you up for success for the rest of the week. You will be introduced to each judge and various IMLBB staff members and your Contestant Handlers. You will meet the IMLBB photographer and make a photo shoot appointment with him.',
       },
       {
+        type: 'qa',
+        q: 'Is it judged?',
+        a: 'This event isn\u2019t judged. However, the judges will be present during portions of this event.',
+      },
+      {
         type: 'checklist',
         q: 'What to bring',
         items: [
@@ -173,11 +178,7 @@ const EVENTS = [
         ],
         note: '',
       },
-      {
-        type: 'callout',
-        label: 'Remember',
-        text: 'This is your first impression on the IMLBB team and on your fellow contestants. Arrive on time, be present, and introduce yourself warmly.',
-      },
+
     ],
     rightCol: [
       {
@@ -185,6 +186,11 @@ const EVENTS = [
         q: 'Your prep notes',
         placeholder: 'Add personal notes here\u2026',
         rows: 4,
+      },
+      {
+        type: 'callout',
+        label: 'Remember',
+        text: 'This is your first impression on the IMLBB team and on your fellow contestants. Arrive on time, be present, and introduce yourself warmly.',
       },
       {
         type: 'tip',
@@ -198,11 +204,11 @@ const EVENTS = [
     id: 'event-3',
     number: '03',
     title: 'Opening Ceremonies',
-    cardMeta: 'Thursday Evening · Congress Plaza Hotel',
-    day: 'Thursday Evening',
-    time: 'Congress Plaza Hotel',
-    callTime: '',
-    venue: 'Congress Plaza Hotel',
+    cardMeta: 'Thursday · Florentine Room',
+    day: 'Thursday',
+    time: '7:00 PM \u2013 09:00 PM',
+    callTime: '5:00 PM',
+    venue: 'Congress Plaza Hotel \u2014 Florentine Room',
     badge: 'MANDATORY',
     contest: 'BOTH',
     leftCol: [
@@ -319,8 +325,8 @@ const EVENTS = [
     title: 'Physique and Stage Presence',
     cardMeta: 'Friday · The Riviera Theater',
     day: 'Friday',
-    time: 'Exhibition Hall',
-    callTime: '',
+    time: '8:00 PM \u2013 11:00 PM',
+    callTime: '5:00 PM',
     venue: 'The Riviera Theater',
     badge: 'MANDATORY',
     contest: 'BOTH',
@@ -453,7 +459,7 @@ const EVENTS = [
     title: 'Contestant Scores & Poster Pickup',
     cardMeta: 'Monday Morning',
     day: 'Monday',
-    time: '10:00 AM \u2013 12:00 PM',
+    time: '10:00 AM \u2013 01:00 PM',
     callTime: 'NONE',
     venue: 'Congress Plaza Hotel',
     badge: 'OPTIONAL',
@@ -500,9 +506,9 @@ const EVENTS = [
     id: 'event-9',
     number: '09',
     title: 'Contestant Speeches',
-    cardMeta: 'Monday Morning · Congress Plaza Hotel',
-    day: 'Monday Morning',
-    time: '10:00 AM \u2013 12:00 PM',
+    cardMeta: 'Monday · Congress Plaza Hotel',
+    day: 'Monday',
+    time: '10:00 AM \u2013 01:00 PM',
     callTime: '',
     venue: 'Congress Plaza Hotel',
     badge: 'OPTIONAL',
@@ -533,30 +539,30 @@ const EVENTS = [
   {
     id: 'event-10',
     number: '10',
-    title: 'Play Spaces & Social Events',
-    cardMeta: 'Thursday\u2013Saturday \u00b7 Various',
-    day: 'Thursday\u2013Saturday Evening',
+    title: 'Poster Signing',
+    cardMeta: 'Thursday and Friday',
+    day: 'Thursday and Friday',
     time: 'Various',
-    callTime: '',
-    venue: 'Various Locations',
+    callTime: 'NONE',
+    venue: 'Congress Plaza Hotel - Lincoln Room',
     badge: 'OPTIONAL',
     contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
         q: 'What happens here?',
-        a: 'IMLBB weekend hosts a variety of evening social events and play spaces. These are consensual spaces governed by explicit community agreements. Attendance is entirely optional and personal. Your participation \u2014 or non-participation \u2014 is not evaluated.',
+        a: 'All contestants are asked to sign IMLBB 2026 commemorative posters, and will receive one on Monday',
       },
       {
         type: 'callout',
         label: 'Remember',
-        text: 'You are always a contestant in public spaces. The Code of Conduct applies at all times. Consent, respect, and community care are non-negotiable.',
+        text: 'There are over 150 posters to sign. Don\u2019t rush. This is a moment to connect with the history of the contest and the community. Sign with care and intention.',
       },
     ],
     rightCol: [
       {
         type: 'tip',
-        text: 'Know your limits and honour them. IMLBB weekend is a marathon. Rest when you need to. A well-rested contestant performs better on stage and in interview.',
+        text: 'Pick a spot on the poster and stick with it.',
       },
     ],
   },
@@ -565,24 +571,24 @@ const EVENTS = [
   {
     id: 'event-11',
     number: '11',
-    title: 'Contestant Dinner',
-    cardMeta: 'Saturday Evening',
-    day: 'Saturday Evening',
-    time: 'Congress Plaza Hotel, Grand Ballroom',
-    callTime: '',
-    venue: 'Congress Plaza Hotel \u2014 Grand Ballroom',
+    title: 'IMLBB Photoshoot',
+    cardMeta: 'Needs to be scheduled',
+    day: 'all weekend',
+    time: 'Congress Plaza Hotel',
+    callTime: 'NONE',
+    venue: 'Congress Plaza Hotel',
     badge: 'MANDATORY',
     contest: 'BOTH',
     leftCol: [
       {
         type: 'qa',
         q: 'What happens here?',
-        a: 'A formal dinner for all contestants, handlers, judges, tallymasters, and the IMLBB team. Dress: leather or formal. A moment of celebration and reflection before the Finals. Speeches, recognition of community milestones, and shared community time.',
+        a: 'Each contestant has a 15-minute private photoshoot with the official IMLBB photographer. This is your chance to create the iconic images that will represent your IMLBB journey for years to come. You can choose to shoot in leather, uniform, or fantasy gear \u2014 whatever best represents your personal leather identity.',
       },
       {
         type: 'callout',
         label: 'Remember',
-        text: 'By Saturday evening, you have already earned your place here. Relax, be present, and soak in the experience \u2014 regardless of what tomorrow holds.',
+        text: 'These photos are part of your IMLBB legacy. Approach this shoot with the same care and intentionality as you would a major professional photoshoot. Communicate clearly with the photographer about your vision.',
       },
     ],
     rightCol: [
@@ -594,7 +600,7 @@ const EVENTS = [
       },
       {
         type: 'tip',
-        text: 'Use dinner to thank your handler and your support team. Gratitude is a leather value too.',
+        text: 'Bring any specific gear or accessories you want to be included in your photoshoot. This is your moment to shine \u2014 make sure you have everything you need to look and feel your best.',
       },
     ],
   },
@@ -664,12 +670,12 @@ const EVENTS = [
   {
     id: 'event-13',
     number: '13',
-    title: 'Post-Contest Celebration',
-    cardMeta: 'Sunday Night',
-    day: 'Sunday Night',
-    time: 'Various',
-    callTime: '',
-    venue: 'Various Venues',
+    title: 'The Black and Blue Ball',
+    cardMeta: 'Monday Night',
+    day: 'Monday Night',
+    time: '9:00 PM \u2013 4:00 AM',
+    callTime: 'NONE',
+    venue: 'Jackhammer Bar, Chicago',
     badge: 'OPTIONAL',
     contest: 'BOTH',
     leftCol: [
@@ -688,6 +694,191 @@ const EVENTS = [
       {
         type: 'tip',
         text: 'Exchange contacts with the contestants you\u2019ve connected with. Your IMLBB class is your family now \u2014 stay in touch.',
+      },
+    ],
+  },
+
+  /* ─── 14 ─── */
+  {
+    id: 'event-14',
+    number: '14',
+    title: 'First Shine',
+    cardMeta: 'Thursday Evening',
+    day: 'Thursday Evening',
+    time: '10:00 PM \u2013 11:00 PM',
+    callTime: '9:30 PM',
+    venue: 'Congress Plaza Hotel',
+    badge: 'MANDATORY',
+    contest: 'IMBB',
+    leftCol: [
+      {
+        type: 'qa',
+        q: 'What happens here?',
+        a: 'The First Shine is a traditional official bootblacking event held Thursday evening at the Spit Shine social, immediately following the Last Shine of the outgoing titleholder. This is your first opportunity to demonstrate your craft in competition and sets the tone for your stand work throughout the weekend.',
+      },
+      {
+        type: 'qa',
+        q: 'How is it scored?',
+        a: 'The First Shine is judged as part of your overall Bootblack Stand Time score. Judges evaluate three key areas: your skill in the craft, the quality of your client interaction, and your demonstrated passion for bootblacking.',
+      },
+      {
+        type: 'callout',
+        label: 'Remember',
+        text: 'Your score here contributes directly to your Stand Time total. Arrive focused and treat this shine with the same care and intentionality you would bring to any judged stand.',
+      },
+    ],
+    rightCol: [
+      {
+        type: 'checklist',
+        q: 'What to wear',
+        items: [
+          'Wear what you would normally wear to work a stand',
+          'No specific attire requirement \u2014 dress for function and confidence',
+        ],
+        note: '',
+      },
+      {
+        type: 'qa',
+        q: 'Will I have support?',
+        a: 'Yes. Staff will guide you from the assembly area to and from the stands, and a staff member will be present for the duration of your shine.',
+      },
+      {
+        type: 'qa',
+        q: 'When will I know my assembly time and location?',
+        a: 'Specific assembly times and locations are provided during Thursday Orientation.',
+      },
+      {
+        type: 'textarea',
+        q: 'Your prep notes',
+        placeholder: 'Add personal notes here\u2026',
+        rows: 3,
+      },
+    ],
+  },
+
+  /* ─── 15 ─── */
+  {
+    id: 'event-15',
+    number: '15',
+    title: 'Bootblack Stand Time',
+    cardMeta: 'Friday & Saturday',
+    day: 'Friday & Saturday',
+    time: '12:00 PM \u2013 4:00 PM',
+    callTime: '',
+    venue: '',
+    badge: 'MANDATORY',
+    contest: 'IMBB',
+    leftCol: [
+      {
+        type: 'qa',
+        q: 'What happens here?',
+        a: 'Contestants work the bootblacking stands for several hours on both Friday and Saturday, with the majority of stand time on Saturday. This is the core judged craft event of the IMBB competition \u2014 your longest sustained opportunity to demonstrate skill, client care, and authentic passion for bootblacking.',
+      },
+      {
+        type: 'checklist',
+        q: 'Judging criteria',
+        items: [
+          'Bootblacking skill and technique',
+          'Quality of client interaction',
+          'Passion and engagement demonstrated throughout',
+        ],
+        note: '',
+      },
+      {
+        type: 'callout',
+        label: 'Remember',
+        text: 'Stand Time is where contests are won. Every shine counts \u2014 whether judges are watching or not. Be consistent, be present, and let your love for the craft show in every interaction.',
+      },
+    ],
+    rightCol: [
+      {
+        type: 'qa',
+        q: 'What should I wear?',
+        a: 'There is no mandatory dress code. Wear what you would normally use when working a stand professionally \u2014 choose whatever lets you work freely and represent yourself well.',
+      },
+      {
+        type: 'qa',
+        q: 'When will I know my schedule?',
+        a: 'Exact stand hours are communicated at least two weeks in advance. Specific assembly times and locations are also confirmed during Thursday Orientation.',
+      },
+      {
+        type: 'qa',
+        q: 'Will I have support?',
+        a: 'Staff will guide you from assembly areas to and from the stands. A staff member remains present for the full duration of your stand time.',
+      },
+      {
+        type: 'textarea',
+        q: 'Your prep notes',
+        placeholder: 'Add personal notes here\u2026',
+        rows: 3,
+      },
+      {
+        type: 'tip',
+        text: 'Pace yourself across Friday and Saturday. Rest between sessions, stay hydrated, and keep your kit organised. A tired bootblack is a distracted one.',
+      },
+    ],
+  },
+
+  /* ─── 16 ─── */
+  {
+    id: 'event-16',
+    number: '16',
+    title: 'Educational Presentation',
+    cardMeta: 'Saturday',
+    day: 'Saturday',
+    time: '',
+    callTime: '',
+    venue: '',
+    badge: 'MANDATORY',
+    contest: 'IMBB',
+    leftCol: [
+      {
+        type: 'qa',
+        q: 'What happens here?',
+        a: 'You deliver a fifteen-minute educational presentation on any bootblacking skill of your choosing, open to the public. This is followed by up to five minutes of questions from judges and audience members. Setup takes five minutes before your slot; teardown takes five minutes after.',
+      },
+      {
+        type: 'qa',
+        q: 'How is it judged?',
+        a: 'Judges evaluate your confidence and ability to convey information clearly to an audience, as well as your ability to engage the audience and handle questions thoughtfully.',
+      },
+      {
+        type: 'callout',
+        label: 'Remember',
+        text: 'Choose a topic you know deeply \u2014 your confidence will show. The judges are not just assessing what you know, they are assessing how well you teach it.',
+      },
+    ],
+    rightCol: [
+      {
+        type: 'checklist',
+        q: 'What to prepare',
+        items: [
+          'A focused 15-minute presentation on a bootblacking skill of your choice',
+          'Any materials, tools, or props you need \u2014 no AV equipment is provided',
+          'Prepare for up to 5 minutes of questions from judges and the audience',
+          'Allow 5 minutes before and after for setup and teardown',
+        ],
+        note: '',
+      },
+      {
+        type: 'qa',
+        q: 'What should I wear?',
+        a: 'There is no attire requirement. Choose something you feel comfortable and confident in for a public presentation.',
+      },
+      {
+        type: 'qa',
+        q: 'When will I know my slot time and location?',
+        a: 'Specific assembly times and locations are provided during Thursday Orientation.',
+      },
+      {
+        type: 'textarea',
+        q: 'Presentation topic \u2014 your notes',
+        placeholder: 'What skill will you present? Key points, structure, materials needed\u2026',
+        rows: 4,
+      },
+      {
+        type: 'tip',
+        text: 'Practise your presentation out loud at full length before the weekend. Fifteen minutes feels long in rehearsal and short on stage \u2014 know your pacing.',
       },
     ],
   },
