@@ -36,18 +36,19 @@ const VENUE = {
 
 // Nearby points of interest shown in the Nearby Spots section
 // Update if the venue moves to a different neighbourhood
+// lat / lon are used to place markers on the interactive map
 const NEARBY_SPOTS = [
-  { type: 'Museum',       name: 'Leather Archives & Museum', url: 'https://leatherarchives.org/' },
-  { type: 'Bar',          name: 'Touché' },
-  { type: 'Bar',          name: 'Jackhammer' },
-  { type: 'Bar',          name: 'Sidetrack',         url: 'https://www.sidetrackchicago.com/' },
-  { type: 'Theater',      name: 'The Riviera Theater',        url: 'https://rivieratheatre.org/' },
-  { type: 'Music Venue',  name: 'House of Blues Chicago',     url: 'https://chicago.houseofblues.com/' },
-  { type: 'Park',         name: 'Millennium Park' },
-  { type: 'Museum',       name: 'Art Institute of Chicago' },
-  { type: 'Aquarium',     name: 'Shedd Aquarium' },
-  { type: 'Pier',         name: 'Navy Pier' },
-  { type: 'Coffee',       name: 'Intelligentsia Coffee' },
+  { type: 'Museum',      name: 'Leather Archives & Museum', url: 'https://leatherarchives.org/',        lat: 41.9947, lon: -87.6694 },
+  { type: 'Bar',         name: 'Touché',                                                                 lat: 41.9941, lon: -87.6686 },
+  { type: 'Bar',         name: 'Jackhammer',                                                             lat: 41.9939, lon: -87.6685 },
+  { type: 'Bar',         name: 'Sidetrack',                 url: 'https://www.sidetrackchicago.com/',   lat: 41.9379, lon: -87.6483 },
+  { type: 'Theater',     name: 'The Riviera Theater',        url: 'https://rivieratheatre.org/',         lat: 41.9685, lon: -87.6587 },
+  { type: 'Music Venue', name: 'House of Blues Chicago',     url: 'https://chicago.houseofblues.com/',   lat: 41.8883, lon: -87.6348 },
+  { type: 'Park',        name: 'Millennium Park',                                                        lat: 41.8827, lon: -87.6233 },
+  { type: 'Museum',      name: 'Art Institute of Chicago',                                               lat: 41.8796, lon: -87.6237 },
+  { type: 'Aquarium',    name: 'Shedd Aquarium',                                                         lat: 41.8676, lon: -87.6140 },
+  { type: 'Pier',        name: 'Navy Pier',                                                              lat: 41.8917, lon: -87.6086 },
+  { type: 'Coffee',      name: 'Intelligentsia Coffee',                                                  lat: 41.8901, lon: -87.6238 },
 ];
 
 if (typeof module !== 'undefined') module.exports = { VENUE, NEARBY_SPOTS };

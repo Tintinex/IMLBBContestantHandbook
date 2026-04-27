@@ -832,7 +832,7 @@ const EVENTS = [
     id: 'event-15',
     number: '15',
     title: 'Geartunes',
-    cardMeta: 'Monday Night',
+    cardMeta: 'Monday Night · Sidetrack',
     day: 'Monday Night',
     time: '9:00 PM \u2013 2:00 AM',
     callTime: 'NONE',

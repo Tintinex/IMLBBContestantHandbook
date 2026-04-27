@@ -45,9 +45,9 @@ const LETTERS = [
     id: 'letter-imlbb',
     eyebrow: 'A message from your International Mr. Leather 2025',
     paragraphs: [
-      'To the IMLBB 2026 Class,',
+      'To the IMLBB class of 2026:',
 
-      'Message from Rene will go here',
+      'You&#39;ve written your speeches, you&#39;ve planned out what you&#39;re wearing,you&#39;ve curated your applications. You&#39;ve gone over every detail over, and over, and over. And now... you&#39;re here. Regardless of how this weekend pans out, you&#39;re already part of eclectic family we call the IML and IMBB brotherhood. So with that said, I want you to really hear me when I tell you that you belong here, every single one of you. Each of you has a story to tell, and it&#39;s worth sharing. So I implore you, as you move through this weekend, don&#39;t worry about who you “should” be while you&#39;re here. All of us are unpolished in our own ways. One of the great joys of weekends like this is we get to embrace ourselves exactly as we are, and showcase ourselves publicly and authentically. Allow me a bootblacking analogy. When a bootblack is brought a pair of boots that have dings, scratches, and marks... the goal is not to try and cover up every imperfection to mask that they were ever there. It&#39;s to embrace those imperfections as part of the boot&#39;s history and not have it shine despite it, but because of it. Those dings, scuffs, and “imperfections” are what make those boots special, unique, and lived in. So please... don&#39;t show us what you think we want to see. Show us you as you are, authentically and unashamed, and allow yourselves to really shine. At the end of this marathon (and it IS a marathon, make sure you rest and drink your water. And no, coffee and energy drinks alone won&#39;t cut it), only one of you will walk away with each the IML and IMBB titles. But as far as I&#39;m concerned, all of you are winners just by being here. Welcome to the family, I can&#39;t wait to meet you.\n      With love,\n      Rene Hebert\n      International Mr. Leather 2025',
     ],
     signature: '\u2014 Rene Hebert, International Mr. Leather 2025',
   },

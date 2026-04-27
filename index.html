@@ -17,6 +17,10 @@
     ║  TO UPDATE FOR A NEW YEAR:  edit config.js only.            ║
     ╚══════════════════════════════════════════════════════════════╝
   -->
+  <!-- ── Leaflet (interactive map with markers for Nearby Spots) ── -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
   <!-- ── Section data files (edit these each year, not index.html) ── -->
   <script src="data/meta.js"></script>
   <script src="data/sheets.js"></script>
@@ -1491,8 +1495,33 @@
     /* Print-only static map image (hidden on screen) */
     .venue-map-print { display: none; }
     /* Nearby spots map */
-    .nearby-map-wrap { width: 100%; margin-bottom: 20px; border: 1px solid var(--border); overflow: hidden; }
-    .nearby-map-wrap iframe { display: block; width: 100%; height: 280px; border: 0; filter: invert(0.9) hue-rotate(195deg) saturate(0.8) brightness(0.85); }
+    .nearby-map-wrap { width: 100%; margin-bottom: 20px; border: 1px solid var(--border); overflow: hidden; position: relative; }
+    #nearby-leaflet-map { width: 100%; height: 400px; background: #111; }
+    /* Override Leaflet popup styles to match handbook dark theme */
+    .leaflet-popup-content-wrapper { background: #111; color: #fff; border: 1px solid rgba(255,255,255,.15); border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,.6); }
+    .leaflet-popup-content { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; line-height: 1.5; margin: 10px 14px; }
+    .leaflet-popup-content strong { font-size: 13px; }
+    .leaflet-popup-tip { background: #111; }
+    .leaflet-popup-close-button { color: rgba(255,255,255,.5) !important; }
+    .leaflet-popup-close-button:hover { color: #fff !important; }
+    .leaflet-attribution-flag { display: none !important; }
+    /* Custom map marker pins */
+    .map-pin-hotel {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--blue); border: 2px solid rgba(255,255,255,.7);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: #fff; letter-spacing: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,.6);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    .map-pin-spot {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: #1a1a1a; border: 2px solid var(--blue-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 700; color: var(--blue-light);
+      box-shadow: 0 2px 6px rgba(0,0,0,.5);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
     .nearby-map-print { display: none; }
     /* keep old placeholder class for backwards compat */
     .nearby-map-link { display: block; text-align: center; padding: 8px 0; background: rgba(27,79,168,.15); border-top: 1px solid var(--border); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue-light); text-decoration: none; }
@@ -1538,6 +1567,13 @@
       color: var(--blue-light); margin-bottom: 8px;
     }
     .nearby-name { font-size: 15px; font-weight: 700; }
+    .nearby-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: #1a1a1a; border: 1px solid var(--blue-light);
+      font-size: 8px; font-weight: 700; color: var(--blue-light);
+      vertical-align: middle; margin-right: 3px; flex-shrink: 0;
+    }
     .nearby-url { display: block; font-size: 11px; margin-top: 6px; color: var(--blue-light); opacity: .75; text-decoration: none; word-break: break-all; }
     .nearby-url:hover { opacity: 1; text-decoration: underline; }
 
@@ -1661,8 +1697,8 @@
       .archive-label { padding: 6pt 8pt !important; font-size: 7.5pt !important; }
       .venue-map-wrap iframe { display: none !important; }
       .venue-map-print { display: block !important; width: 100% !important; height: 200pt !important; object-fit: cover !important; }
-      .nearby-map-wrap iframe { display: none !important; }
-      .nearby-map-print { display: block !important; width: 100% !important; height: 2.5in !important; object-fit: cover !important; margin-bottom: 10pt !important; }
+      #nearby-leaflet-map { display: none !important; }
+      .nearby-map-print { display: block !important; width: 100% !important; height: 2.5in !important; object-fit: cover !important; object-position: center; margin-bottom: 10pt !important; }
 
       #toc {
         width: 8.5in !important; min-height: 11in !important;
@@ -1699,6 +1735,7 @@
       .nearby-type { font-size: 6pt !important; }
       .nearby-name { font-size: 12pt !important; }
       .nearby-url  { display: none !important; }
+      .nearby-num  { display: none !important; }
 
       /* ══════════════════════════════
          LEATHER ARCHIVES & MUSEUM — 2 exact pages
@@ -2660,29 +2697,73 @@ function applyConfig() {
   const nearbyCity = document.getElementById('nearby-city-label');
   if (nearbyCity) nearbyCity.textContent = VENUE.city;
 
-  // Nearby map — OSM iframe on screen, static image in print
+  // Nearby map — Leaflet interactive map on screen, static OSM image in print
   const nearbyMapEl = document.getElementById('nearby-map');
   if (nearbyMapEl) {
-    // Slightly wider bbox to show the neighborhood around the hotel
-    const [minlon, minlat, maxlon, maxlat] = VENUE.mapBbox.split(',').map(Number);
-    const pad = 0.012;
-    const wideBbox = `${(minlon-pad).toFixed(4)},${(minlat-pad).toFixed(4)},${(maxlon+pad).toFixed(4)},${(maxlat+pad).toFixed(4)}`;
-    const wideEnc  = wideBbox.split(',').map(encodeURIComponent).join('%2C');
-    const [mlat, mlon] = VENUE.mapMarker.split(',');
+    // Wide bbox covering all spots (Rogers Park down to Museum Campus)
+    const printBbox = '-87.72,41.845,-87.585,42.01';
     nearbyMapEl.innerHTML = `
-      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${wideEnc}&layer=mapnik&marker=${mlat}%2C${mlon}"
-        title="Nearby spots around ${VENUE.name}" allowfullscreen></iframe>
+      <div id="nearby-leaflet-map"></div>
       <img class="nearby-map-print"
-        src="https://render.openstreetmap.org/cgi-bin/export?bbox=${wideBbox}&scale=10000&format=png"
-        alt="Map of nearby spots" loading="eager">
+        src="https://render.openstreetmap.org/cgi-bin/export?bbox=${printBbox}&scale=75000&format=png"
+        alt="Map of Chicago showing nearby spots" loading="eager">
       <a class="nearby-map-link" href="${VENUE.googleMapsUrl}" target="_blank" rel="noopener">
         &#x1F5FA;&nbsp; Explore in Google Maps
       </a>`;
+
+    if (typeof L !== 'undefined') {
+      const map = L.map('nearby-leaflet-map', {
+        zoomControl: true,
+        scrollWheelZoom: false,
+        attributionControl: true,
+      });
+
+      // CartoDB Dark Matter — dark tile layer, no API key required
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 19,
+      }).addTo(map);
+
+      const bounds = [];
+
+      // Hotel marker
+      const [mlat, mlon] = VENUE.mapMarker.split(',').map(Number);
+      const hotelIcon = L.divIcon({
+        className: '',
+        html: '<div class="map-pin-hotel">H</div>',
+        iconSize: [32, 32], iconAnchor: [16, 16], popupAnchor: [0, -18],
+      });
+      L.marker([mlat, mlon], { icon: hotelIcon })
+        .addTo(map)
+        .bindPopup(`<strong>${esc(VENUE.name)}</strong><br>${esc(VENUE.address)}`);
+      bounds.push([mlat, mlon]);
+
+      // Spot markers — numbered to match the cards below
+      (NEARBY_SPOTS || []).forEach((s, i) => {
+        if (s.lat == null || s.lon == null) return;
+        const spotIcon = L.divIcon({
+          className: '',
+          html: `<div class="map-pin-spot">${i + 1}</div>`,
+          iconSize: [24, 24], iconAnchor: [12, 12], popupAnchor: [0, -14],
+        });
+        L.marker([s.lat, s.lon], { icon: spotIcon })
+          .addTo(map)
+          .bindPopup(`<strong>${esc(s.name)}</strong><br>${esc(s.type)}`);
+        bounds.push([s.lat, s.lon]);
+      });
+
+      if (bounds.length) map.fitBounds(bounds, { padding: [32, 32] });
+    }
   }
 
   const nearbyGrid = document.getElementById('nearby-grid');
-  if (nearbyGrid && NEARBY_SPOTS) nearbyGrid.innerHTML = NEARBY_SPOTS.map(s =>
-    `<div class="nearby-card"><p class="nearby-type">${s.type}</p><p class="nearby-name">${s.name}</p>${s.url ? `<a class="nearby-url" href="${s.url}" target="_blank" rel="noopener">${s.url.replace(/^https?:\/\//, '')}</a>` : ''}</div>`).join('');
+  if (nearbyGrid && NEARBY_SPOTS) nearbyGrid.innerHTML = NEARBY_SPOTS.map((s, i) =>
+    `<div class="nearby-card">
+      <p class="nearby-type">${s.lat != null ? `<span class="nearby-num">${i + 1}</span> ` : ''}${esc(s.type)}</p>
+      <p class="nearby-name">${esc(s.name)}</p>
+      ${s.url ? `<a class="nearby-url" href="${s.url}" target="_blank" rel="noopener">${s.url.replace(/^https?:\/\//, '')}</a>` : ''}
+    </div>`).join('');
 
   const fwcLayout = document.getElementById('fwc-layout');
   if (fwcLayout && FIRST_WIVES_LETTER) {
