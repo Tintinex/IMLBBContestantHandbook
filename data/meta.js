@@ -37,5 +37,7 @@ const IMLBB_YEAR   = 2026;  // 4-digit year
  *  Set to '' and use full https:// URLs directly in each `photo` field.
  */
 const PHOTOS_BASE_URL = 'https://drive.google.com/thumbnail?sz=w400-h500&id=';
+// Bare file IDs in the `photo` field get this prefix automatically.
+// Full drive.google.com share URLs also work — the renderer extracts the ID.
 
 if (typeof module !== 'undefined') module.exports = { IMLBB_NUMBER, IMLBB_YEAR, PHOTOS_BASE_URL };

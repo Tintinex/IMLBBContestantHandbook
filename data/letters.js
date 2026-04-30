@@ -51,7 +51,7 @@ const LETTERS = [
   /* ─── 1. Letter from the current International Mr. Leather ─── */
   {
     id: 'letter-imlbb',
-    photo: '',
+    photo: 'https://drive.google.com/file/d/1TmIULjaDsSk4hW8qxgCQlvCrJuJ_rBeC/view?usp=drive_link',
     title: 'Rene Hebert',
     eyebrow: 'A message from your International Mr. Leather 2025',
     paragraphs: [
@@ -65,7 +65,7 @@ const LETTERS = [
   /* ─── 2. Letter from the Den Daddy ─── */
   {
     id: 'letter-den-daddy',
-    photo: '',   // paste Google Drive file ID here once uploaded
+    photo: 'https://drive.google.com/file/d/1HUnMazEVrBcb56m6AQ-YkgkeF74PoXoF/view?usp=drive_link',   // paste Google Drive file ID here once uploaded
     title: 'Den Daddy Miguel',
     eyebrow: 'A message from your Den Daddy',
     paragraphs: [

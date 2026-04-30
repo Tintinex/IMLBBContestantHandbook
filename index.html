@@ -3799,10 +3799,17 @@ function renderExpGrid() {
 
 function resolvePhotoUrl(photo) {
   if (!photo) return '';
-  // Full URL → use as-is
-  if (/^https?:\/\//.test(photo)) return photo;
-  // Bare ID / filename → prepend PHOTOS_BASE_URL if defined
   const base = (typeof PHOTOS_BASE_URL !== 'undefined' && PHOTOS_BASE_URL) ? PHOTOS_BASE_URL : '';
+  // Google Drive share page URL → extract file ID and build thumbnail URL
+  // Handles: drive.google.com/file/d/FILE_ID/view  and  drive.google.com/open?id=FILE_ID
+  const driveFileMatch = photo.match(/drive\.google\.com\/file\/d\/([^/?#]+)/);
+  const driveOpenMatch = photo.match(/drive\.google\.com\/open\?(?:.*&)?id=([^&]+)/);
+  const driveId = (driveFileMatch || driveOpenMatch || [])[1];
+  // thumbnail endpoint: resizes to ~400px, ~55 KB — much faster than uc?export=view (6 MB)
+  if (driveId) return `https://drive.google.com/thumbnail?sz=w400-h500&id=${driveId}`;
+  // Full URL (non-Drive) → use as-is
+  if (/^https?:\/\//.test(photo)) return photo;
+  // Bare ID / filename → prepend PHOTOS_BASE_URL
   return base ? base + photo : '';
 }
 
