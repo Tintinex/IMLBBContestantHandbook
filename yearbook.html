@@ -141,12 +141,17 @@
     }
 
     /*
-     * Photo: square crop with object-fit:cover so every image is identical
-     * size.  object-position: top keeps faces visible.
+     * Photo: fixed 1.4in tall with object-fit:cover so every image is
+     * identical size.  object-position: top keeps faces visible.  Using
+     * an explicit inch height (rather than aspect-ratio) because Chrome's
+     * print engine doesn't always honor aspect-ratio inside a CSS grid,
+     * which lets a 5th row sneak onto each page.  Sized so exactly 4 rows
+     * of 5 cards fill a half-letter page when headers/footers are
+     * disabled in the browser print dialog.
      */
     .yb-photo {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      height: 1.4in;
       background: var(--card-bg);
       border-radius: 3px;
       overflow: hidden;
@@ -248,8 +253,11 @@
       html, body { background: #0a0a0a !important; }
       #top-bar, #status, #yb-footer { display: none !important; }
 
-      /* Remove screen padding — @page margin takes over */
-      #yearbook-doc { padding: 0; }
+      /* Remove screen padding and let the doc fill the printable area —
+         keeping width: 5.5in here would overflow the @page 0.3in margin
+         and make Chrome scale every photo down, letting a 5th row sneak
+         onto each page. */
+      #yearbook-doc { padding: 0; width: auto; }
 
       /* IML table follows IMBB — a little top breathing room on the first page.
          On subsequent IML pages the thead repeats flush to the page margin. */
