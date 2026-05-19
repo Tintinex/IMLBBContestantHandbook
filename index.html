@@ -3837,18 +3837,52 @@ function queuePhoto(img, primaryUrl, fallbackUrl, trackerName, onPlaceholder) {
 
   attempt(primaryUrl, 0);
 }
+/* helper function to capture all notes for export to PDF */
+function prepareTextareasForPrint() {
+  const textareas = document.querySelectorAll(".prep-textarea");
+  const restoreList = [];
 
+  textareas.forEach(textarea => {
+    const div = document.createElement("div");
+    div.className = "textarea-print-value";
+    div.innerText = textarea.value || "";
+    div.style.whiteSpace = "pre-wrap";
+
+    textarea.style.display = "none";
+    textarea.insertAdjacentElement("afterend", div);
+
+    restoreList.push(() => {
+      div.remove();
+      textarea.style.display = "";
+    });
+  });
+
+  return () => restoreList.forEach(fn => fn());
+}
+
+  
 /* ── Smart print: waits up to 90s for all photos to settle ── */
 async function printWhenReady(btn) {
-  if (_photoTracker.isReady()) { window.print(); return; }
+  if (_photoTracker.isReady()) {
+    const restore = prepareTextareasForPrint();
+    window.print();
+    restore();
+    return;
+  }
+
   const orig = btn ? btn.innerHTML : '';
   if (btn) { btn.innerHTML = '&#x23F3; Loading photos&hellip;'; btn.disabled = true; }
+
   const deadline = Date.now() + 90_000;
   while (!_photoTracker.isReady() && Date.now() < deadline) {
     await new Promise(r => setTimeout(r, 400));
   }
+
   if (btn) { btn.innerHTML = orig; btn.disabled = false; }
+
+  const restore = prepareTextareasForPrint();
   window.print();
+  restore();
 }
 
 /* ── Print sections 2 + 3 only (Contestants + Judges) ── */
