@@ -231,7 +231,7 @@ const EVENTS = [
     cardMeta: 'Thursday · Florentine Room',
     day: 'Thursday',
     time: '7:00 PM \u2013 08:30 PM',
-    callTime: '5:00 PM',
+    callTime: '4:30 PM',
     venue: 'Congress Plaza Hotel \u2014 Florentine Room',
     badge: 'MANDATORY',
     contest: 'BOTH',
